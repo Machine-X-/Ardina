@@ -24,7 +24,13 @@
     <!-- Symptoms -->
     <string name="symptoms">Symptoms</string>
 
-<<<<<<< HEAD
+    <
+    <
+    <
+    <
+    <
+    <
+    < HEAD
     <string name="action_settings">Settings</string>
     <string name="go_to_fb_login">Login with Facebook!</string>
     <string name="go_to_maps_activity">View Map to Find a Game!</string>
@@ -107,10 +113,10 @@
     <string name="male_ventral">male body frontal view"</string>
     <string name="female">Female</string>
 
-=======
+    =======
     <!-- Application -->
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_symptoms">SymptomsActivity</string>
->>>>>>> 389620918450483ab04649f0b4643b9e2fc1ea75
+    >>>>>>> 389620918450483ab04649f0b4643b9e2fc1ea75
 </resources>
