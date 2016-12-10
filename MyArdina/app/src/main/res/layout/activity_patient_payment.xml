@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include android:id="@+id/app_bar"
+        layout="@layout/app_bar"/>
+
+    <RelativeLayout
+        android:layout_below="@id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/payment_layout">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:id="@+id/payment_main">
+
+            <LinearLayout
+                android:id="@+id/payment_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:gravity="center"
+                        android:textColor="@color/blackPrimaryText"
+                        android:textStyle="bold|italic"
+                        android:text="@string/paypal_transaction"/>
+                <Button
+                    android:id="@+id/login_paypal"
+                    style="actionButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:textAlignment="center"
+                    android:text="@string/login_to_paypal"
+                    android:background="@drawable/login_auth_buttons"
+                    android:textColor="@color/whitePrimaryText"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/continue_button_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/b_debug_to_doctors_available"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/cont"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
