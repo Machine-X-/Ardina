@@ -72,8 +72,8 @@ public class PatientPaymentActivity extends AppCompatActivity implements View.On
 
         // TESTING PAYMENTS
         // Be sure to be in sandbox mode and use the following credentials:
-        // username: Michaelberkovich310-buyer@gmail.com
-        // password: myardina
+        // username: ardina-test@myardina.com
+        // password: Dummy1234 
 
         // UI References
         Button paypalLoginButton = (Button) findViewById(R.id.login_paypal);
