@@ -72,5 +72,7 @@
     <string name="update_payment">Has the doctor been paid for this visit?</string>
     <string name="pay_doctor">Doctor Paid</string>
     <string name="back">Back</string>
+    <string name="action_settings">Settings</string>
+
 
 </resources>
