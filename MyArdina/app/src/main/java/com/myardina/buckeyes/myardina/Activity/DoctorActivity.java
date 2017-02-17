@@ -84,8 +84,8 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
         // Gets an instance of the NotificationManager service
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Intent acceptIntent = new Intent(Intent.ACTION_DIAL);
-        acceptIntent.setData(Uri.parse("tel:" + phoneNumber));
+        Intent acceptIntent = new Intent(this, VideoActivity.class);
+        //acceptIntent.setData(Uri.parse("tel:" + phoneNumber));
         PendingIntent pendingAcceptIntent = PendingIntent.getActivity(this, 0, acceptIntent, 0);
 
 //        Intent declineIntent = new Intent(this, TeleMedicineActivity.class);

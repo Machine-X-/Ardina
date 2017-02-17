@@ -132,7 +132,7 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                         doctorDTO.setTableKey(userKeys.get(position));
                         doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
                         mDoctorService.updateDoctorToNotAvailable(doctorDTO);
-                        Intent activity = new Intent(DoctorsAvailableActivity.this, TeleMedicineActivity.class);
+                        Intent activity = new Intent(DoctorsAvailableActivity.this, VideoActivity.class);
                         activity.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
                         mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                         mPaymentService.updatePaymentWithDoctor(mPaymentDTO);

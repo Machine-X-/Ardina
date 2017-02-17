@@ -120,7 +120,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 attemptLogin();
                 break;
             case R.id.email_register_button:
-                Intent registerActivity = new Intent(LoginActivity.this, VideoActivity.class);
+                Intent registerActivity = new Intent(LoginActivity.this, RegisterActivity.class);
                 String email = mEmailView.getText().toString();
                 if (!TextUtils.isEmpty(email)) {
                     registerActivity.putExtra(CommonConstants.EXTRA_EMAIL, email);
