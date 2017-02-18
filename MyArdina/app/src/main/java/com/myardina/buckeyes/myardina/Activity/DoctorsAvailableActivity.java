@@ -2,12 +2,16 @@ package com.myardina.buckeyes.myardina.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -85,6 +89,56 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
         mDoctorsTable = mRef.getReference().child(CommonConstants.DOCTORS_TABLE);
 
         Log.d(LOG_TAG, "Exiting onCreate...");
+
+
+    }
+
+    private View createSpeakMethodDialog(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DoctorsAvailableActivity.this);
+
+        //bring external view into current activity
+        LayoutInflater inflater = getLayoutInflater();
+        View dialoglayout = inflater.inflate(R.layout.doctors_available_contact_dialog, null);
+        alertDialogBuilder.setView(dialoglayout);
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+
+        return dialoglayout;
+
+    }
+
+    private void addDialogListeners(View parentView){
+        Button phoneButton = (Button)parentView.findViewById(R.id.phone_button);
+        Button videoButton = (Button)parentView.findViewById(R.id.video_button);
+
+        final Intent videoIntent = new Intent(this, VideoActivity.class);
+        final Intent phoneIntent = new Intent(this, TeleMedicineActivity.class);
+
+
+        phoneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                phoneIntent.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
+                phoneIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
+                startActivity(phoneIntent);
+            }
+        });
+
+        videoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                videoIntent.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
+                videoIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
+                startActivity(videoIntent);
+            }
+        });
+
+
+
     }
 
     private void initializeListeners() {
@@ -132,13 +186,12 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                         doctorDTO.setTableKey(userKeys.get(position));
                         doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
                         mDoctorService.updateDoctorToNotAvailable(doctorDTO);
-                        Intent activity = new Intent(DoctorsAvailableActivity.this, VideoActivity.class);
-                        activity.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
+                        View parentView = createSpeakMethodDialog();
+                        addDialogListeners(parentView);
                         mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                         mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
-                        activity.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
+
                         mDoctorsTable.removeEventListener(mValueEventListener);
-                        DoctorsAvailableActivity.this.startActivity(activity);
                         break;
                     default:
                         break;
