@@ -90,7 +90,9 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
             acceptIntent = new Intent(this, VideoActivity.class);
         }
         else{
-            acceptIntent = new Intent(this, TeleMedicineActivity.class);
+            acceptIntent = new Intent(Intent.ACTION_DIAL);
+            acceptIntent.setData(Uri.parse("tel:" + phoneNumber));
+
         }
 
         //acceptIntent.setData(Uri.parse("tel:" + phoneNumber));
