@@ -31,16 +31,17 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".Activity.SplashActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".Activity.LoginActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -49,7 +50,8 @@
             android:name=".Activity.RegisterActivity"
             android:label="@string/title_activity_register"
             android:parentActivityName=".Activity.LoginActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.myardina.buckeyes.myardina.Activity.LoginActivity" />
@@ -58,7 +60,8 @@
             android:name=".Activity.DoctorActivity"
             android:label="@string/title_activity_doctor"
             android:parentActivityName=".Activity.LoginActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.myardina.buckeyes.myardina.Activity.LoginActivity" />
@@ -67,7 +70,8 @@
             android:name=".Activity.SymptomsActivity"
             android:label="@string/title_activity_symptoms"
             android:parentActivityName=".Activity.LoginActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.myardina.buckeyes.myardina.Activity.LoginActivity" />
@@ -76,7 +80,8 @@
             android:name=".Activity.PatientPaymentActivity"
             android:label="@string/title_activity_payment"
             android:parentActivityName=".Activity.SymptomsActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.myardina.buckeyes.myardina.Activity.SymptomsActivity" />
@@ -84,16 +89,19 @@
         <activity
             android:name=".Activity.TeleMedicineActivity"
             android:label="@string/title_activity_tele_medicine"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.DoctorsAvailableActivity"
             android:label="@string/title_activity_doctors_available"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.AdditionalInformationActivity"
             android:label="@string/title_activity_additional_information"
             android:parentActivityName=".Activity.RegisterActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.myardina.buckeyes.myardina.Activity.RegisterActivity" />
@@ -101,11 +109,13 @@
         <activity
             android:name=".Activity.AdminActivity"
             android:label="@string/title_activity_admin"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.UpdatePaymentActivity"
             android:label="@string/title_activity_update_payment"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.myardina.buckeyes.myardina.Activity.AdminActivity" />
