@@ -111,7 +111,7 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
 
     }
 
-    private void addDialogListeners(View parentView){
+    private void addDialogListeners(View parentView, final DoctorDTO doctorDTO){
         Button phoneButton = (Button)parentView.findViewById(R.id.phone_button);
         Button videoButton = (Button)parentView.findViewById(R.id.video_button);
 
@@ -124,6 +124,12 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
             public void onClick(View view) {
                 phoneIntent.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
                 phoneIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
+                doctorDTO.setVideoRequested(false);
+                doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
+                mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
+                mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
+                mDoctorsTable.removeEventListener(mValueEventListener);
                 startActivity(phoneIntent);
             }
         });
@@ -133,6 +139,12 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
             public void onClick(View view) {
                 videoIntent.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
                 videoIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
+                doctorDTO.setVideoRequested(true);
+                doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
+                mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
+                mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
+                mDoctorsTable.removeEventListener(mValueEventListener);
                 startActivity(videoIntent);
             }
         });
@@ -184,14 +196,8 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                     case R.id.lvDoctorsAvailableList:
                         DoctorDTO doctorDTO = new DoctorDTO();
                         doctorDTO.setTableKey(userKeys.get(position));
-                        doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
-                        mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                         View parentView = createSpeakMethodDialog();
-                        addDialogListeners(parentView);
-                        mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
-                        mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
-
-                        mDoctorsTable.removeEventListener(mValueEventListener);
+                        addDialogListeners(parentView, doctorDTO);
                         break;
                     default:
                         break;
