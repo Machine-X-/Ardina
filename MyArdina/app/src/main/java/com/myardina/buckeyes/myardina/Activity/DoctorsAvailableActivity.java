@@ -119,18 +119,17 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
         final Intent phoneIntent = new Intent(this, TeleMedicineActivity.class);
 
 
-        doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
-        mDoctorService.updateDoctorToNotAvailable(doctorDTO);
-        mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
-        mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
-        mDoctorsTable.removeEventListener(mValueEventListener);
-
         phoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 phoneIntent.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
                 phoneIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
                 doctorDTO.setVideoRequested(false);
+                doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
+                mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
+                mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
+                mDoctorsTable.removeEventListener(mValueEventListener);
                 startActivity(phoneIntent);
             }
         });
@@ -141,6 +140,11 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 videoIntent.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
                 videoIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
                 doctorDTO.setVideoRequested(true);
+                doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
+                mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
+                mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
+                mDoctorsTable.removeEventListener(mValueEventListener);
                 startActivity(videoIntent);
             }
         });

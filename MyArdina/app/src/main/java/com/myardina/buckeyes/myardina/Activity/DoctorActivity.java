@@ -96,11 +96,6 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
         //acceptIntent.setData(Uri.parse("tel:" + phoneNumber));
         PendingIntent pendingAcceptIntent = PendingIntent.getActivity(this, 0, acceptIntent, 0);
 
-//        Intent declineIntent = new Intent(this, TeleMedicineActivity.class);
-//        PendingIntent pendingDeclineIntent = PendingIntent.getActivity(this, 0, declineIntent, 0);
-
-        // Create the reply action and add the remote input.
-
         //Get an instance of NotificationManager
         NotificationCompat.Builder mBuilder =
                 (NotificationCompat.Builder) new NotificationCompat.Builder(this)
