@@ -78,13 +78,21 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
         Log.d(LOG_TAG, "Exiting onCreate...");
     }
 
-    private void sendNotification(String phoneNumber) {
+    private void sendNotification(String phoneNumber, boolean videoRequested) {
         Log.d(LOG_TAG, "Entering sendNotification...");
 
         // Gets an instance of the NotificationManager service
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Intent acceptIntent = new Intent(this, VideoActivity.class);
+        Intent acceptIntent;
+
+        if(videoRequested){
+            acceptIntent = new Intent(this, VideoActivity.class);
+        }
+        else{
+            acceptIntent = new Intent(this, TeleMedicineActivity.class);
+        }
+
         //acceptIntent.setData(Uri.parse("tel:" + phoneNumber));
         PendingIntent pendingAcceptIntent = PendingIntent.getActivity(this, 0, acceptIntent, 0);
 
@@ -166,7 +174,7 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
                 if (TextUtils.equals(mDoctorDTO.getUserAccountId(), userChanged.getUserAccountId())) {
                     mDoctorDTO = userChanged;
                     if (mDoctorDTO.isRequested()) {
-                        sendNotification(mDoctorDTO.getRequesterPhoneNumber());
+                      sendNotification(mDoctorDTO.getRequesterPhoneNumber(), mDoctorDTO.getVideoRequested());
                     }
                 }
             }
