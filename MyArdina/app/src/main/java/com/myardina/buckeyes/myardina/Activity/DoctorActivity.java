@@ -88,6 +88,7 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
 
         if(videoRequested){
             acceptIntent = new Intent(this, VideoActivity.class);
+            acceptIntent.putExtra(CommonConstants.DOCTOR_DTO, mDoctorDTO);
         }
         else{
             acceptIntent = new Intent(Intent.ACTION_DIAL);
@@ -172,6 +173,7 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
                     mDoctorDTO = userChanged;
                     if (mDoctorDTO.isRequested()) {
                       sendNotification(mDoctorDTO.getRequesterPhoneNumber(), mDoctorDTO.getVideoRequested());
+
                     }
                 }
             }

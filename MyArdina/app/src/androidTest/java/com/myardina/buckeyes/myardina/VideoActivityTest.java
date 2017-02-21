@@ -32,7 +32,7 @@ public class VideoActivityTest extends ActivityInstrumentationTestCase2<LoginAct
      * Clicks on leg and chooses "pink eye" for symptom, goes to PatientPaymentActivity
      * @throws Exception
      */
-    public void testSymptomsPickerOneSymptom() throws Exception {
+    public void testVideoCallChoice() throws Exception {
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
@@ -92,6 +92,6 @@ public class VideoActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         solo.assertCurrentActivity("Expected Doctors Available activity", DoctorsAvailableActivity.class);
 
         //Should be Available Doctors activity now, set doctor to available
-        solo.
+
     }
 }

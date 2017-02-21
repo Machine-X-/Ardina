@@ -42,10 +42,10 @@ public class PatientPaymentActivityTest extends ActivityInstrumentationTestCase2
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
         EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
-        solo.enterText(email, "s@t.com");
+        solo.enterText(email, "c@p.com");
         //add password
         EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
-        solo.enterText(password, "Applepie");
+        solo.enterText(password, "Dummy1");
         //click sign in button
         Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);
@@ -87,10 +87,10 @@ public class PatientPaymentActivityTest extends ActivityInstrumentationTestCase2
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
         EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
-        solo.enterText(email, "s@t.com");
+        solo.enterText(email, "c@p.com");
         //add password
         EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
-        solo.enterText(password, "Applepie");
+        solo.enterText(password, "Dummy1");
         //click sign in button
         Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);
