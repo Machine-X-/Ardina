@@ -41,8 +41,8 @@
                 <LinearLayout
                     android:id="@+id/controlsLayout"
                     android:orientation="vertical"
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:paddingLeft="0dp"
                     android:paddingRight="0dp"
                     android:paddingTop="5dp"
@@ -50,7 +50,7 @@
                     android:layout_centerInParent="true"
                     android:gravity="center"
                     android:background="@drawable/rounded_border_edittext"
-                    android:alpha="0.9">
+                    android:alpha="0">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -59,170 +59,12 @@
                         android:paddingBottom="0dp"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
-                        android:src="@drawable/vidyo_io_vertical_dark_at_2x"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/button_material_light"/>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="25dp"
-                            android:textSize="15sp"
-                            android:width="110dp"
-                            android:gravity="end"
-                            android:maxLines="1"
-                            android:paddingRight="5dp"
-                            android:text="Host"/>
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="25dp"
-                            android:textSize="12sp"
-                            android:id="@+id/hostTextBox"
-                            android:elegantTextHeight="true"
-                            android:enabled="true"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:inputType="text"
-                            android:paddingStart="5dp"
-                            android:paddingEnd="5dp"
-                            android:paddingTop="0dp"
-                            android:background="@android:color/transparent"
-                            android:hint="example.vidyo.io" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/button_material_light"/>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="25dp"
-                            android:textSize="15sp"
-                            android:width="110dp"
-                            android:gravity="end"
-                            android:maxLines="1"
-                            android:paddingRight="5dp"
-                            android:text="Token"/>
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="25dp"
-                            android:textSize="12sp"
-                            android:id="@+id/tokenTextBox"
-                            android:elegantTextHeight="true"
-                            android:enabled="true"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:inputType="text"
-                            android:paddingStart="5dp"
-                            android:paddingEnd="5dp"
-                            android:background="@android:color/transparent"
-                            android:paddingTop="0dp"
-                            android:hint="required"/>
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/button_material_light"/>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="25dp"
-                            android:textSize="15sp"
-                            android:width="110dp"
-                            android:gravity="end"
-                            android:maxLines="1"
-                            android:paddingRight="5dp"
-                            android:text="Display Name"/>
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="25dp"
-                            android:textSize="12sp"
-                            android:id="@+id/displayNameTextBox"
-                            android:elegantTextHeight="true"
-                            android:enabled="true"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:inputType="text"
-                            android:paddingStart="5dp"
-                            android:paddingEnd="5dp"
-                            android:paddingTop="0dp"
-                            android:background="@android:color/transparent"
-                            android:hint="your name"/>
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/button_material_light"/>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="25dp"
-                            android:textSize="15sp"
-                            android:width="110dp"
-                            android:gravity="end"
-                            android:maxLines="1"
-                            android:paddingRight="5dp"
-                            android:text="Resource ID"/>
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="25dp"
-                            android:textSize="12sp"
-                            android:id="@+id/resourceIdTextBox"
-                            android:elegantTextHeight="true"
-                            android:enabled="true"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:inputType="text"
-                            android:paddingStart="5dp"
-                            android:paddingEnd="5dp"
-                            android:paddingTop="0dp"
-                            android:background="@android:color/transparent"
-                            android:hint="required"/>
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/button_material_light"/>
+                        android:src="@drawable/ardina_login"/>
 
                     <ProgressBar
                         android:id="@+id/connectionSpinner"
                         android:layout_width="wrap_content"
-                        android:layout_height="25dp"
+                        android:layout_height="100dp"
                         android:visibility="invisible"
                         android:layout_gravity="center"/>
 
