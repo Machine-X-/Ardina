@@ -70,4 +70,11 @@ public class CommonConstants {
 
     // PICKLIST KEYS
     public static final String ADMINS_PICKLIST = "Admins";
+
+    //VIDYO INFO
+    public static final String PATIENT_TOKEN = "cHJvdmlzaW9uAHVzZXIxQGMyMGVjOC52aWR5by5pbwA2MzY4NDkzNTA2OAAANGU0ZmRjN2UzNTdhNjRiZDkxN2U2MmI5ODIxNjQyNjYyYzc3Y2UwOWU3NjAxYmI5YWJmNDljYzY3ZDEzZDk0NWQyZjhmOTFkOGI4NWY1YjQxYTdiNjgyYzAzNDA2NjY0";
+    public static final String DOCTOR_TOKEN = "cHJvdmlzaW9uAHVzZXIxQGMyMGVjOC52aWR5by5pbwA2MzY4NDkzNTMxMgAAOGFhZmU3YjcwZDY1ZTQ2MmU2OTg3ZWRjNzY1YTkxYTBlMDUyMTZhYzhmMmZlNjEzZWY3Y2EwN2JkOTI4ZWQ4NWQ3YmQxOWQ1NjQ2OTNhNzJiNTdjZTgwM2VjZTc5Y2E0";
+    public static final String VIDYO_HOST = "prod.vidyo.io";
+    public static final String VIDYO_RES = "ardina-bmmas-5911";
+    public static final String DOCTOR_NAME = "DoctorName";
 }
