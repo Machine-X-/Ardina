@@ -36,7 +36,7 @@ public class VideoActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 1000);
+        solo.waitForActivity(LoginActivity.class, 1000); // was 1000
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
@@ -49,7 +49,8 @@ public class VideoActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);
         //waiting for login in case there is a network delay
-        solo.waitForActivity(SymptomsActivity.class, 2000);
+        solo.waitForActivity(SymptomsActivity.class, 2000); // was 2000
+        solo.sleep(5000); //added
         // assert that the current activity is the SymptomsActivity.class
         solo.assertCurrentActivity("Expected Symptoms activity", SymptomsActivity.class);
         Button bLegs = (Button) solo.getCurrentActivity().findViewById(R.id.mv_legs_button);
@@ -88,7 +89,7 @@ public class VideoActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         solo.clickOnView(continueButton);
 
         //wait for and check that next activity is DoctorsAvailableActivity
-        solo.waitForActivity(DoctorsAvailableActivity.class, 2000);
+        solo.waitForActivity(DoctorsAvailableActivity.class, 6000); //was 2000
         solo.assertCurrentActivity("Expected Doctors Available activity", DoctorsAvailableActivity.class);
 
         //Should be Available Doctors activity now, set doctor to available

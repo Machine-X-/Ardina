@@ -52,7 +52,7 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);
         //waiting for login in case there is a network delay
-        solo.waitForActivity(SymptomsActivity.class, 2000);
+        solo.waitForActivity(SymptomsActivity.class, 4000); // was 2000
         // assert that the current activity is the SymptomsActivity.class
         solo.assertCurrentActivity("Expected Symptoms activity", SymptomsActivity.class);
         Button bLegs = (Button) solo.getCurrentActivity().findViewById(R.id.mv_legs_button);
@@ -108,10 +108,11 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);
         //waiting for login in case there is a network delay
-        solo.waitForActivity(SymptomsActivity.class, 2000);
+        solo.waitForActivity(SymptomsActivity.class, 4000); //was 2000
         // assert that the current activity is the SymptomsActivity.class
         solo.assertCurrentActivity("Expected Symptoms activity", SymptomsActivity.class);
         //click on continue button
+        assertTrue(solo.waitForView(R.id.b_continue_to_payment, 1, 5000)); //added
         Button continueButton = (Button) solo.getCurrentActivity().findViewById(R.id.b_continue_to_payment);
         solo.waitForView(continueButton, 4000, false);
         solo.clickOnView(continueButton);
@@ -210,7 +211,7 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         solo.assertCurrentActivity("Expected Symptoms activity", SymptomsActivity.class);
         Button bLegs = (Button) solo.getCurrentActivity().findViewById(R.id.mv_legs_button);
         //click on the legs
-        solo.waitForView(bLegs, 3000, false);
+        solo.waitForView(bLegs, 4000, false); //was 3000
         solo.clickOnView(bLegs);
         //symptoms picker fragment should show up with symptoms associated with legs
         solo.waitForFragmentByTag("SymptomsPickerDialog",2000);
