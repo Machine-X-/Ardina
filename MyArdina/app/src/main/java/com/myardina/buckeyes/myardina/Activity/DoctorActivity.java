@@ -86,16 +86,15 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
 
         Intent acceptIntent;
 
-        if(videoRequested){
+        if(videoRequested) {
             acceptIntent = new Intent(this, VideoActivity.class);
             //pass off the Doctor reference to the video activity:
             DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+            acceptIntent.putExtra(CommonConstants.DOCTOR_NAME, doctorDTO.getFirstName() + " " + doctorDTO.getLastName());
             acceptIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-        }
-        else{
+        } else {
             acceptIntent = new Intent(Intent.ACTION_DIAL);
             acceptIntent.setData(Uri.parse("tel:" + phoneNumber));
-
         }
 
         //acceptIntent.setData(Uri.parse("tel:" + phoneNumber));

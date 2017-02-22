@@ -448,11 +448,12 @@ public class VideoActivity extends Activity implements
             mDisplayName = patientDTO.getFirstName() + " " + patientDTO.getLastName();
         } else if(intent.hasExtra(CommonConstants.DOCTOR_DTO)) {
             //otherwise caller is a doctor
-            DoctorDTO doctorDTO =
-                    (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
             mToken = CommonConstants.DOCTOR_TOKEN;
-            mDisplayName = doctorDTO.getFirstName() + " " + doctorDTO.getLastName();
+            mDisplayName = "Doctor";
+            //DisplayName =  getIntent().getStringExtra(CommonConstants.DOCTOR_NAME);
         } else {
+            mToken = CommonConstants.DOCTOR_TOKEN;
+            mDisplayName = "Doctor";
             Log.d(LOG_TAG, "SetUserInfo- Error getting DTO from parent activity");
         }
     }
