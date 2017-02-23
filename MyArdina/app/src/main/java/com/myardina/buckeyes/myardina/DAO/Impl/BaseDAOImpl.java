@@ -90,7 +90,7 @@ public abstract class BaseDAOImpl implements BaseDAO {
         Log.d(LOG_TAG, "Entering insertUpdateInfo...");
         DatabaseReference tableRef = mRef.getReference(table).child(childId);
         for (String key : insertMap.keySet()) {
-            tableRef.child(key).setValue(insertMap.get(key));
+                tableRef.child(key).setValue(insertMap.get(key));
         }
         Log.d(LOG_TAG, "Exiting insertUpdateInfo...");
     }

@@ -2,16 +2,13 @@ package com.myardina.buckeyes.myardina;
 
 import android.app.AlertDialog;
 import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.myardina.buckeyes.myardina.Activity.LoginActivity;
-import com.myardina.buckeyes.myardina.Activity.SplashActivity;
-import com.myardina.buckeyes.myardina.Activity.SymptomsActivity;
 import com.myardina.buckeyes.myardina.Activity.PatientPaymentActivity;
+import com.myardina.buckeyes.myardina.Activity.SymptomsActivity;
 import com.robotium.solo.Solo;
 
 public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<LoginActivity> {
@@ -44,10 +41,10 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
         EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
-        solo.enterText(email, "s@t.com");
+        solo.enterText(email, "ardina@yahoo.com");
         //add password
         EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
-        solo.enterText(password, "Applepie");
+        solo.enterText(password, "Ardina43212!");
         //click sign in button
         Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);
@@ -100,10 +97,10 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
         EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
-        solo.enterText(email, "s@t.com");
+        solo.enterText(email, "ardina@yahoo.com");
         //add password
         EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
-        solo.enterText(password, "Applepie");
+        solo.enterText(password, "Ardina43212!");
         //click sign in button
         Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);
@@ -139,10 +136,10 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
         EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
-        solo.enterText(email, "s@t.com");
+        solo.enterText(email, "ardina@yahoo.com");
         //add password
         EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
-        solo.enterText(password, "Applepie");
+        solo.enterText(password, "Ardina43211!");
         //click sign in button
         Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);
@@ -197,10 +194,10 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
         EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
-        solo.enterText(email, "s@t.com");
+        solo.enterText(email, "ardina@yahoo.com");
         //add password
         EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
-        solo.enterText(password, "Applepie");
+        solo.enterText(password, "Ardina43212!");
         //click sign in button
         Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);
@@ -259,10 +256,10 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
         EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
-        solo.enterText(email, "s@t.com");
+        solo.enterText(email, "ardina@yahoo.com");
         //add password
         EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
-        solo.enterText(password, "Applepie");
+        solo.enterText(password, "Ardina43212!");
         //click sign in button
         Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);

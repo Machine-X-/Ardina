@@ -57,6 +57,10 @@
     <string name="cont">Continue</string>
     <string name="login_to_paypal">Login to Paypal</string>
     <string name="waiting_doc_response">Waiting for the doctors approval…</string>
+    <string name="video_button_text">Video call</string>
+    <string name="phone_button_text">Phone call</string>
+    <string name="doctors_available_dialog_title">Select your method of contact</string>
+
 
     <!--Arrays-->
     <string-array name="doctor_availability_spinner_array">
@@ -72,5 +76,7 @@
     <string name="update_payment">Has the doctor been paid for this visit?</string>
     <string name="pay_doctor">Doctor Paid</string>
     <string name="back">Back</string>
+    <string name="action_settings">Settings</string>
+
 
 </resources>
