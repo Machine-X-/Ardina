@@ -74,10 +74,11 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
         names = new ArrayList<>();
         userKeys = new HashMap<>();
 
-        ListView lvDoctorListView = (ListView) findViewById(R.id.lvDoctorsAvailableList);
+        final ListView lvDoctorListView = (ListView) findViewById(R.id.lvDoctorsAvailableList);
         lvDoctorListView.setOnItemClickListener(mOnItemClickListener);
         mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, names);
         lvDoctorListView.setAdapter(mAdapter);
+
 
         mPatientDTO = (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);
         mPaymentDTO = (PaymentDTO) getIntent().getExtras().get(CommonConstants.PAYMENT_DTO);
@@ -89,7 +90,17 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "Exiting onCreate...");
 
+        updateList();
 
+    }
+
+    private void updateList(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private View createSpeakMethodDialog(){
@@ -170,11 +181,10 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                     names.add(name);
                 }
 
-                if (names.size() > 0) {
-                    mAdapter.notifyDataSetChanged();
-                } else {
+                if (names.size() == 0) {
                     Toast.makeText(DoctorsAvailableActivity.this, CommonConstants.NO_DOCTORS_MESSAGE, Toast.LENGTH_LONG).show();
                 }
+                updateList();
                 Log.d(LOG_TAG, "Exiting onDataChange...");
             }
 
@@ -237,6 +247,7 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
     protected void onResume(){
         System.out.println("onResume method for LoginActivity being called");
         mDoctorsTable.addValueEventListener(mValueEventListener);
+        updateList();
         super.onResume();
     }
 

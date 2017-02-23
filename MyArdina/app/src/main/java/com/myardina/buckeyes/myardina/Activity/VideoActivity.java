@@ -1,25 +1,27 @@
 package com.myardina.buckeyes.myardina.Activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.app.Activity;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.myardina.buckeyes.myardina.Common.CommonConstants;
+import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
+import com.myardina.buckeyes.myardina.DTO.PatientDTO;
 import com.myardina.buckeyes.myardina.R;
-import com.vidyo.VidyoClient.Connector.VidyoConnector;
 import com.vidyo.VidyoClient.Connector.Connector;
+import com.vidyo.VidyoClient.Connector.VidyoConnector;
 import com.vidyo.VidyoClient.Endpoint.VidyoLogRecord;
 
 /**
@@ -45,10 +47,10 @@ public class VideoActivity extends Activity implements
     private ProgressBar mConnectionSpinner;
     private LinearLayout mControlsLayout;
     private LinearLayout mToolbarLayout;
-    private EditText mHost;
-    private EditText mDisplayName;
-    private EditText mToken;
-    private EditText mResourceId;
+    //private EditText mHost;
+    //private EditText mDisplayName;
+    //private EditText mToken;
+    //private EditText mResourceId;
     private TextView mToolbarStatus;
     private FrameLayout mVideoFrame;
     private FrameLayout mToggleToolbarFrame;
@@ -57,6 +59,10 @@ public class VideoActivity extends Activity implements
     private boolean mAllowReconnect = true;
     private String mReturnURL = null;
     private VideoActivity mSelf;
+
+    //call parameters
+    private String mDisplayName;
+    private String mToken;
 
     /*
      *  Operating System Events
@@ -75,10 +81,10 @@ public class VideoActivity extends Activity implements
         mToolbarLayout = (LinearLayout) findViewById(R.id.toolbarLayout);
         mVideoFrame = (FrameLayout) findViewById(R.id.videoFrame);
         mToggleToolbarFrame = (FrameLayout) findViewById(R.id.toggleToolbarFrame);
-        mHost = (EditText) findViewById(R.id.hostTextBox);
-        mDisplayName = (EditText) findViewById(R.id.displayNameTextBox);
-        mToken = (EditText) findViewById(R.id.tokenTextBox);
-        mResourceId = (EditText) findViewById(R.id.resourceIdTextBox);
+        //mHost = (EditText) findViewById(R.id.hostTextBox);
+        //mDisplayName = (EditText) findViewById(R.id.displayNameTextBox);
+        //mToken = (EditText) findViewById(R.id.tokenTextBox);
+        //mResourceId = (EditText) findViewById(R.id.resourceIdTextBox);
         mToolbarStatus = (TextView) findViewById(R.id.toolbarStatusText);
         mConnectionSpinner = (ProgressBar) findViewById(R.id.connectionSpinner);
         mSelf = this;
@@ -107,10 +113,10 @@ public class VideoActivity extends Activity implements
 
         // If the app was launched by a different app, then get any parameters; otherwise use default settings
         Intent intent = getIntent();
-        mHost.setText(intent.hasExtra("host") ? intent.getStringExtra("host") : "prod.vidyo.io");
-        mToken.setText(intent.hasExtra("token") ? intent.getStringExtra("token") : "");
-        mDisplayName.setText(intent.hasExtra("displayName") ? intent.getStringExtra("displayName") : "");
-        mResourceId.setText(intent.hasExtra("resourceId") ? intent.getStringExtra("resourceId") : "");
+        //mHost.setText(intent.hasExtra("host") ? intent.getStringExtra("host") : "prod.vidyo.io");
+        //mToken.setText(intent.hasExtra("token") ? intent.getStringExtra("token") : "");
+        //mDisplayName.setText(intent.hasExtra("displayName") ? intent.getStringExtra("displayName") : "");
+        //mResourceId.setText(intent.hasExtra("resourceId") ? intent.getStringExtra("resourceId") : "");
         mReturnURL = intent.hasExtra("returnURL") ? intent.getStringExtra("returnURL") : null;
         mHideConfig = intent.getBooleanExtra("hideConfig", false);
         mAutoJoin = intent.getBooleanExtra("autoJoin", false);
@@ -337,11 +343,14 @@ public class VideoActivity extends Activity implements
             // Display the spinner animation
             mConnectionSpinner.setVisibility(View.VISIBLE);
 
+            setUserInfo();
+
+            //Connect parameters: Host, Token, DisplayName, Resource ID
             final boolean status = mVidyoConnector.Connect(
-                    mHost.getText().toString(),
-                    mToken.getText().toString(),
-                    mDisplayName.getText().toString(),
-                    mResourceId.getText().toString(),
+                    CommonConstants.VIDYO_HOST,
+                    mToken,
+                    mDisplayName,
+                    CommonConstants.VIDYO_RES,
                     this);
             if (!status) {
                 // Hide the spinner animation
@@ -424,6 +433,27 @@ public class VideoActivity extends Activity implements
     public void OnLog(VidyoLogRecord logRecord) {
         //mLogger.LogClientLib(logRecord.message);
         Log.d(LOG_TAG,logRecord.message);
+    }
+
+    //setup the parameters for the connection
+    private void setUserInfo() {
+        Intent intent = getIntent();
+
+        //if video caller is a patient
+        if(intent.hasExtra(CommonConstants.PATIENT_DTO)) {
+            PatientDTO patientDTO =
+                    (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);
+            mToken = CommonConstants.PATIENT_TOKEN;
+            mDisplayName = patientDTO.getFirstName() + " " + patientDTO.getLastName();
+        } else if(intent.hasExtra(CommonConstants.DOCTOR_DTO)) {
+            //otherwise caller is a doctor
+            mToken = CommonConstants.DOCTOR_TOKEN;
+            DoctorDTO doctorDTO =
+                    (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+            mDisplayName = doctorDTO.getFirstName() + " " + doctorDTO.getLastName();
+        } else {
+            Log.d(LOG_TAG, "SetUserInfo- Error getting DTO from parent activity");
+        }
     }
 
 }

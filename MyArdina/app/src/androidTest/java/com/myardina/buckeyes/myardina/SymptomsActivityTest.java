@@ -36,35 +36,35 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 1000);
+        solo.waitForActivity(LoginActivity.class, 10000);
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
         EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
-        solo.enterText(email, "ardina@yahoo.com");
+        solo.enterText(email, "c@p.com");
         //add password
         EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
-        solo.enterText(password, "Ardina43212!");
+        solo.enterText(password, "Dummy1");
         //click sign in button
         Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);
         //waiting for login in case there is a network delay
-        solo.waitForActivity(SymptomsActivity.class, 2000);
+        solo.waitForActivity(SymptomsActivity.class, 10000); // was 2000
         // assert that the current activity is the SymptomsActivity.class
         solo.assertCurrentActivity("Expected Symptoms activity", SymptomsActivity.class);
         Button bLegs = (Button) solo.getCurrentActivity().findViewById(R.id.mv_legs_button);
         //click on the legs
-        solo.waitForView(bLegs, 3000, false);
+        solo.waitForView(bLegs, 10000, false);
         solo.clickOnView(bLegs);
         //symptoms picker fragment should show up with symptoms associated with legs
-        solo.waitForFragmentByTag("SymptomsPickerDialog",2000);
+        solo.waitForFragmentByTag("SymptomsPickerDialog",10000);
         DialogFragment SymptomsPickerFragment = (DialogFragment) solo.getCurrentActivity().getFragmentManager().findFragmentById(0);
         //get the view elements inside fragment & click on pink eye option
         AlertDialog SymptomsPickerDialog = (AlertDialog) SymptomsPickerFragment.getDialog();
         //check the pink eye
         solo.clickOnView(SymptomsPickerDialog.getListView().getChildAt(2));
         //needs to wait or else things get messed up
-        solo.waitForDialogToClose(2500);
+        solo.waitForDialogToClose(10000);
         SymptomsPickerFragment.dismiss();
         //check that symptoms list is just pink eye
         assertEquals(1, SymptomsActivity.mSelList.size());
@@ -75,7 +75,7 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         Button continueButton = (Button) solo.getCurrentActivity().findViewById(R.id.b_continue_to_payment);
         solo.clickOnView(continueButton);
         //wait for and check that next activity is PatientPaymentActivity
-        solo.waitForActivity(PatientPaymentActivity.class, 2000);
+        solo.waitForActivity(PatientPaymentActivity.class, 10000);
         solo.assertCurrentActivity("Expected Payment activity", PatientPaymentActivity.class);
 
 
@@ -92,25 +92,26 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 1000);
+        solo.waitForActivity(LoginActivity.class, 2000);
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
         EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
-        solo.enterText(email, "ardina@yahoo.com");
+        solo.enterText(email, "c@p.com");
         //add password
         EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
-        solo.enterText(password, "Ardina43212!");
+        solo.enterText(password, "Dummy1");
         //click sign in button
         Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);
         //waiting for login in case there is a network delay
-        solo.waitForActivity(SymptomsActivity.class, 2000);
+        solo.waitForActivity(SymptomsActivity.class, 2000); //was 2000
         // assert that the current activity is the SymptomsActivity.class
         solo.assertCurrentActivity("Expected Symptoms activity", SymptomsActivity.class);
         //click on continue button
+        assertTrue(solo.waitForView(R.id.b_continue_to_payment, 1, 2000)); //added
         Button continueButton = (Button) solo.getCurrentActivity().findViewById(R.id.b_continue_to_payment);
-        solo.waitForView(continueButton, 4000, false);
+        solo.waitForView(continueButton, 2000, false);
         solo.clickOnView(continueButton);
         //wait for and check that next activity is PatientPaymentActivity
         solo.waitForActivity(PatientPaymentActivity.class, 2000);
@@ -131,15 +132,15 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 1000);
+        solo.waitForActivity(LoginActivity.class, 2000);
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
         EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
-        solo.enterText(email, "ardina@yahoo.com");
+        solo.enterText(email, "c@p.com");
         //add password
         EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
-        solo.enterText(password, "Ardina43211!");
+        solo.enterText(password, "Dummy1");
         //click sign in button
         Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);
@@ -149,7 +150,7 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         solo.assertCurrentActivity("Expected Symptoms activity", SymptomsActivity.class);
         Button bLegs = (Button) solo.getCurrentActivity().findViewById(R.id.mv_legs_button);
         //click on the legs
-        solo.waitForView(bLegs, 3000, false);
+        solo.waitForView(bLegs, 2000, false);
         solo.clickOnView(bLegs);
         //symptoms picker fragment should show up with symptoms associated with legs
         solo.waitForFragmentByTag("SymptomsPickerDialog",2000);
@@ -161,7 +162,7 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         //check the migraine
         solo.clickOnView(SymptomsPickerDialog.getListView().getChildAt(0));
         //needs to wait or else things get messed up
-        solo.waitForDialogToClose(2500);
+        solo.waitForDialogToClose(2000);
         SymptomsPickerFragment.dismiss();
         //check that symptoms list contains the pink eye and migraine in that order
         assertEquals(2, SymptomsActivity.mSelList.size());
@@ -189,15 +190,15 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 1000);
+        solo.waitForActivity(LoginActivity.class, 2000);
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
         EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
-        solo.enterText(email, "ardina@yahoo.com");
+        solo.enterText(email, "c@p.com");
         //add password
         EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
-        solo.enterText(password, "Ardina43212!");
+        solo.enterText(password, "Dummy1");
         //click sign in button
         Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);
@@ -207,7 +208,7 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         solo.assertCurrentActivity("Expected Symptoms activity", SymptomsActivity.class);
         Button bLegs = (Button) solo.getCurrentActivity().findViewById(R.id.mv_legs_button);
         //click on the legs
-        solo.waitForView(bLegs, 3000, false);
+        solo.waitForView(bLegs, 2000, false); //was 3000
         solo.clickOnView(bLegs);
         //symptoms picker fragment should show up with symptoms associated with legs
         solo.waitForFragmentByTag("SymptomsPickerDialog",2000);
@@ -221,7 +222,7 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         //check the ear ache
         solo.clickOnView(SymptomsPickerDialog.getListView().getChildAt(3));
         //needs to wait or else things get messed up
-        solo.waitForDialogToClose(2500);
+        solo.waitForDialogToClose(2000);
         SymptomsPickerFragment.dismiss();
         //check that symptoms list contains the pink eye and migraine in that order
         assertEquals(3, SymptomsActivity.mSelList.size());
@@ -251,15 +252,15 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 1000);
+        solo.waitForActivity(LoginActivity.class, 2000);
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
         EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
-        solo.enterText(email, "ardina@yahoo.com");
+        solo.enterText(email, "c@p.com");
         //add password
         EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
-        solo.enterText(password, "Ardina43212!");
+        solo.enterText(password, "Dummy1");
         //click sign in button
         Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);
@@ -269,7 +270,7 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         solo.assertCurrentActivity("Expected Symptoms activity", SymptomsActivity.class);
         Button bLegs = (Button) solo.getCurrentActivity().findViewById(R.id.mv_legs_button);
         //click on the legs
-        solo.waitForView(bLegs, 3000, false);
+        solo.waitForView(bLegs, 2000, false);
         solo.clickOnView(bLegs);
         //symptoms picker fragment should show up with symptoms associated with legs
         solo.waitForFragmentByTag("SymptomsPickerDialog",2000);
@@ -285,7 +286,7 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
         //check the sore throat
         solo.clickOnView(SymptomsPickerDialog.getListView().getChildAt(1));
         //needs to wait or else things get messed up
-        solo.waitForDialogToClose(2500);
+        solo.waitForDialogToClose(2000);
         SymptomsPickerFragment.dismiss();
         //check that symptoms list contains the pink eye and migraine in that order
         assertEquals(3, SymptomsActivity.mSelList.size());
@@ -323,10 +324,10 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
 //        solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
 //        //add username
 //        EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
-//        solo.enterText(email, "s@t.com");
+//        solo.enterText(email, "c@p.com");
 //        //add password
 //        EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
-//        solo.enterText(password, "Applepie");
+//        solo.enterText(password, "Dummy1");
 //        //click sign in button
 //        Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
 //        solo.clickOnView(loginBtn);

@@ -82,9 +82,7 @@ public class PatientPaymentActivity extends AppCompatActivity implements View.On
         // TODO: DEBUG BUTTONS ! REMOVE BEFORE DEPLOYING
         Button continueButton = (Button) findViewById(R.id.b_debug_to_doctors_available);
         continueButton.setOnClickListener(this);
-
-        /*** Testing without the debug button ***/
-
+        // Testing without the debug button
         //continueButton.setVisibility(View.GONE);
 
         mPatientDTO = (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);

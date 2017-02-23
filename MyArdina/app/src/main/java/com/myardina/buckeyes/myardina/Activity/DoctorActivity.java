@@ -86,17 +86,18 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
 
         Intent acceptIntent;
 
-        if(videoRequested){
+        if(videoRequested) {
             acceptIntent = new Intent(this, VideoActivity.class);
-        }
-        else{
+            //pass off the Doctor reference to the video activity:
+            DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+            acceptIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
+        } else {
             acceptIntent = new Intent(Intent.ACTION_DIAL);
             acceptIntent.setData(Uri.parse("tel:" + phoneNumber));
-
         }
 
         //acceptIntent.setData(Uri.parse("tel:" + phoneNumber));
-        PendingIntent pendingAcceptIntent = PendingIntent.getActivity(this, 0, acceptIntent, 0);
+        PendingIntent pendingAcceptIntent = PendingIntent.getActivity(this, 0, acceptIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //Get an instance of NotificationManager
         NotificationCompat.Builder mBuilder =
@@ -172,6 +173,7 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
                     mDoctorDTO = userChanged;
                     if (mDoctorDTO.isRequested()) {
                       sendNotification(mDoctorDTO.getRequesterPhoneNumber(), mDoctorDTO.getVideoRequested());
+
                     }
                 }
             }
