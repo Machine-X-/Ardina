@@ -42,7 +42,7 @@ public class VideoActivityTest extends ActivityInstrumentationTestCase2<LoginAct
      * Just test that user can get to paypal app
      * @throws Exception
      */
-    public void testPhoneActivityStart() throws Exception{
+    public void testVideoActivityStart() throws Exception{
 
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
@@ -88,7 +88,7 @@ public class VideoActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         solo.clickInList(1);
         solo.clickOnButton(0);
 
-        solo.waitForView(500);
+        solo.waitForView(50);
 
         doctorDTO.setAvailable(false);
         doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
@@ -98,7 +98,7 @@ public class VideoActivityTest extends ActivityInstrumentationTestCase2<LoginAct
     }
 
 
-    public void testPhoneActivityGoBackToDialogue() throws Exception{
+    public void testVideoActivityGoBackToDialogue() throws Exception{
 
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
@@ -145,7 +145,7 @@ public class VideoActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         solo.clickOnButton(0);
         solo.goBack();
 
-        solo.waitForView(500);
+        solo.waitForView(50);
 
         doctorDTO.setAvailable(false);
         doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
@@ -155,7 +155,7 @@ public class VideoActivityTest extends ActivityInstrumentationTestCase2<LoginAct
     }
 
 
-    public void testPhoneActivityGoBackToDoctorList() throws Exception{
+    public void testVideoActivityGoBackToDoctorList() throws Exception{
 
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
@@ -203,7 +203,7 @@ public class VideoActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         solo.goBack();
         solo.goBack();
 
-        solo.waitForView(500);
+        solo.waitForView(50);
 
         doctorDTO.setAvailable(false);
         doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
