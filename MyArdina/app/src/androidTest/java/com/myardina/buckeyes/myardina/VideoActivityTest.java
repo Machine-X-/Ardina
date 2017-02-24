@@ -3,8 +3,8 @@ package com.myardina.buckeyes.myardina;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ToggleButton;
 
-import com.google.firebase.database.DatabaseReference;
 import com.myardina.buckeyes.myardina.Activity.LoginActivity;
 import com.myardina.buckeyes.myardina.Activity.PatientPaymentActivity;
 import com.myardina.buckeyes.myardina.Activity.SymptomsActivity;
@@ -30,11 +30,6 @@ public class VideoActivityTest extends ActivityInstrumentationTestCase2<LoginAct
     }
 
     private DoctorService mDoctorService;
-    private DatabaseReference mDoctorsTable;
-    private static final String LOG_TAG = "VIDEO_TESTING";
-
-
-    public DoctorDTO doctorDTO;
 
 
     /**
@@ -204,6 +199,260 @@ public class VideoActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         solo.goBack();
 
         solo.waitForView(50);
+
+        doctorDTO.setAvailable(false);
+        doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
+        mDoctorService = new DoctorServiceImpl();
+        mDoctorService.updateDoctorAvailability(doctorDTO);
+
+    }
+
+
+
+
+
+
+    public void testVideoActivityToggleConnectButton() throws Exception{
+
+        solo.unlockScreen();
+        //This code just logs in and gets to symptom activity,
+        //repeat of code of testing successful login from login activity test
+        solo.waitForActivity(LoginActivity.class, 1000);
+        // check that we have the right activity
+        solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
+        //add username
+        EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
+        solo.enterText(email, "ardina@yahoo.com");
+        //add password
+        EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
+        solo.enterText(password, "Ardina43212!");
+        //click sign in button
+        Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
+        solo.clickOnView(loginBtn);
+        //waiting for login in case there is a network delay
+        solo.waitForActivity(SymptomsActivity.class, 2000);
+        // assert that the current activity is the SymptomsActivity.class
+        solo.assertCurrentActivity("Expected Symptoms activity", SymptomsActivity.class);
+        //click on continue button
+        Button continueButton = (Button) solo.getCurrentActivity().findViewById(R.id.b_continue_to_payment);
+        solo.waitForView(continueButton, 4000, false);
+        solo.clickOnView(continueButton);
+        solo.waitForView(continueButton, 4000, false);
+        //wait for and check that next activity is PatientPaymentActivity
+        solo.waitForActivity(PatientPaymentActivity.class, 2000);
+        solo.assertCurrentActivity("Expected PatientPayment activity", PatientPaymentActivity.class);
+        //should be on payment activity now
+
+        Button bypassPayPal = (Button) solo.getCurrentActivity().findViewById(R.id.b_debug_to_doctors_available);
+        solo.waitForView(bypassPayPal, 2000, false);
+
+        DoctorDTO doctorDTO = new DoctorDTO();
+        doctorDTO.setAvailable(true);
+        doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
+        mDoctorService = new DoctorServiceImpl();
+        mDoctorService.updateDoctorAvailability(doctorDTO);
+        //Sets Doctor availability to true in Firebase
+
+        solo.clickOnView(bypassPayPal);
+
+        solo.clickInList(1);
+        solo.clickOnButton(0);
+
+        solo.waitForView(100);
+
+        ToggleButton mToggleConnectButton = (ToggleButton) solo.getCurrentActivity().findViewById(R.id.toggleConnectButton);
+        solo.waitForView(mToggleConnectButton, 4000, false);
+        solo.clickOnView(mToggleConnectButton);
+        solo.waitForView(mToggleConnectButton, 4000, false);
+
+
+        doctorDTO.setAvailable(false);
+        doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
+        mDoctorService = new DoctorServiceImpl();
+        mDoctorService.updateDoctorAvailability(doctorDTO);
+
+    }
+
+
+    public void testVideoActivityClickCameraSwitchButton() throws Exception{
+
+        solo.unlockScreen();
+        //This code just logs in and gets to symptom activity,
+        //repeat of code of testing successful login from login activity test
+        solo.waitForActivity(LoginActivity.class, 1000);
+        // check that we have the right activity
+        solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
+        //add username
+        EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
+        solo.enterText(email, "ardina@yahoo.com");
+        //add password
+        EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
+        solo.enterText(password, "Ardina43212!");
+        //click sign in button
+        Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
+        solo.clickOnView(loginBtn);
+        //waiting for login in case there is a network delay
+        solo.waitForActivity(SymptomsActivity.class, 2000);
+        // assert that the current activity is the SymptomsActivity.class
+        solo.assertCurrentActivity("Expected Symptoms activity", SymptomsActivity.class);
+        //click on continue button
+        Button continueButton = (Button) solo.getCurrentActivity().findViewById(R.id.b_continue_to_payment);
+        solo.waitForView(continueButton, 4000, false);
+        solo.clickOnView(continueButton);
+        solo.waitForView(continueButton, 4000, false);
+        //wait for and check that next activity is PatientPaymentActivity
+        solo.waitForActivity(PatientPaymentActivity.class, 2000);
+        solo.assertCurrentActivity("Expected PatientPayment activity", PatientPaymentActivity.class);
+        //should be on payment activity now
+
+        Button bypassPayPal = (Button) solo.getCurrentActivity().findViewById(R.id.b_debug_to_doctors_available);
+        solo.waitForView(bypassPayPal, 2000, false);
+
+        DoctorDTO doctorDTO = new DoctorDTO();
+        doctorDTO.setAvailable(true);
+        doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
+        mDoctorService = new DoctorServiceImpl();
+        mDoctorService.updateDoctorAvailability(doctorDTO);
+        //Sets Doctor availability to true in Firebase
+
+        solo.clickOnView(bypassPayPal);
+
+        solo.clickInList(1);
+        solo.clickOnButton(0);
+
+        solo.waitForView(100);
+
+        ToggleButton mCameraSwitchButton = (ToggleButton) solo.getCurrentActivity().findViewById(R.id.cameraSwitch);
+        solo.waitForView(mCameraSwitchButton, 4000, false);
+        solo.clickOnView(mCameraSwitchButton);
+        solo.waitForView(mCameraSwitchButton, 4000, false);
+
+
+        doctorDTO.setAvailable(false);
+        doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
+        mDoctorService = new DoctorServiceImpl();
+        mDoctorService.updateDoctorAvailability(doctorDTO);
+
+    }
+
+
+    public void testVideoActivityClickCameraPrivacyButton() throws Exception{
+
+        solo.unlockScreen();
+        //This code just logs in and gets to symptom activity,
+        //repeat of code of testing successful login from login activity test
+        solo.waitForActivity(LoginActivity.class, 1000);
+        // check that we have the right activity
+        solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
+        //add username
+        EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
+        solo.enterText(email, "ardina@yahoo.com");
+        //add password
+        EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
+        solo.enterText(password, "Ardina43212!");
+        //click sign in button
+        Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
+        solo.clickOnView(loginBtn);
+        //waiting for login in case there is a network delay
+        solo.waitForActivity(SymptomsActivity.class, 2000);
+        // assert that the current activity is the SymptomsActivity.class
+        solo.assertCurrentActivity("Expected Symptoms activity", SymptomsActivity.class);
+        //click on continue button
+        Button continueButton = (Button) solo.getCurrentActivity().findViewById(R.id.b_continue_to_payment);
+        solo.waitForView(continueButton, 4000, false);
+        solo.clickOnView(continueButton);
+        solo.waitForView(continueButton, 4000, false);
+        //wait for and check that next activity is PatientPaymentActivity
+        solo.waitForActivity(PatientPaymentActivity.class, 2000);
+        solo.assertCurrentActivity("Expected PatientPayment activity", PatientPaymentActivity.class);
+        //should be on payment activity now
+
+        Button bypassPayPal = (Button) solo.getCurrentActivity().findViewById(R.id.b_debug_to_doctors_available);
+        solo.waitForView(bypassPayPal, 2000, false);
+
+        DoctorDTO doctorDTO = new DoctorDTO();
+        doctorDTO.setAvailable(true);
+        doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
+        mDoctorService = new DoctorServiceImpl();
+        mDoctorService.updateDoctorAvailability(doctorDTO);
+        //Sets Doctor availability to true in Firebase
+
+        solo.clickOnView(bypassPayPal);
+
+        solo.clickInList(1);
+        solo.clickOnButton(0);
+
+        solo.waitForView(100);
+
+        ToggleButton mCameraPrivacyButton = (ToggleButton) solo.getCurrentActivity().findViewById(R.id.cameraPrivacyButton);
+        solo.waitForView(mCameraPrivacyButton, 4000, false);
+        solo.clickOnView(mCameraPrivacyButton);
+        solo.waitForView(mCameraPrivacyButton, 4000, false);
+
+
+        doctorDTO.setAvailable(false);
+        doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
+        mDoctorService = new DoctorServiceImpl();
+        mDoctorService.updateDoctorAvailability(doctorDTO);
+
+    }
+
+
+
+
+    public void testVideoActivityClickMicrophonePrivacyButton() throws Exception{
+
+        solo.unlockScreen();
+        //This code just logs in and gets to symptom activity,
+        //repeat of code of testing successful login from login activity test
+        solo.waitForActivity(LoginActivity.class, 1000);
+        // check that we have the right activity
+        solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
+        //add username
+        EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
+        solo.enterText(email, "ardina@yahoo.com");
+        //add password
+        EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
+        solo.enterText(password, "Ardina43212!");
+        //click sign in button
+        Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
+        solo.clickOnView(loginBtn);
+        //waiting for login in case there is a network delay
+        solo.waitForActivity(SymptomsActivity.class, 2000);
+        // assert that the current activity is the SymptomsActivity.class
+        solo.assertCurrentActivity("Expected Symptoms activity", SymptomsActivity.class);
+        //click on continue button
+        Button continueButton = (Button) solo.getCurrentActivity().findViewById(R.id.b_continue_to_payment);
+        solo.waitForView(continueButton, 4000, false);
+        solo.clickOnView(continueButton);
+        solo.waitForView(continueButton, 4000, false);
+        //wait for and check that next activity is PatientPaymentActivity
+        solo.waitForActivity(PatientPaymentActivity.class, 2000);
+        solo.assertCurrentActivity("Expected PatientPayment activity", PatientPaymentActivity.class);
+        //should be on payment activity now
+
+        Button bypassPayPal = (Button) solo.getCurrentActivity().findViewById(R.id.b_debug_to_doctors_available);
+        solo.waitForView(bypassPayPal, 2000, false);
+
+        DoctorDTO doctorDTO = new DoctorDTO();
+        doctorDTO.setAvailable(true);
+        doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
+        mDoctorService = new DoctorServiceImpl();
+        mDoctorService.updateDoctorAvailability(doctorDTO);
+        //Sets Doctor availability to true in Firebase
+
+        solo.clickOnView(bypassPayPal);
+
+        solo.clickInList(1);
+        solo.clickOnButton(0);
+
+        solo.waitForView(100);
+
+        ToggleButton mMicrophonePrivacyButton = (ToggleButton) solo.getCurrentActivity().findViewById(R.id.microphonePrivacyButton);
+        solo.waitForView(mMicrophonePrivacyButton, 4000, false);
+        solo.clickOnView(mMicrophonePrivacyButton);
+        solo.waitForView(mMicrophonePrivacyButton, 4000, false);
+
 
         doctorDTO.setAvailable(false);
         doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
