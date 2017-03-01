@@ -78,20 +78,26 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
         Log.d(LOG_TAG, "Exiting onCreate...");
     }
 
-    private void sendNotification(String phoneNumber) {
+    private void sendNotification(String phoneNumber, boolean videoRequested) {
         Log.d(LOG_TAG, "Entering sendNotification...");
 
         // Gets an instance of the NotificationManager service
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Intent acceptIntent = new Intent(Intent.ACTION_DIAL);
-        acceptIntent.setData(Uri.parse("tel:" + phoneNumber));
-        PendingIntent pendingAcceptIntent = PendingIntent.getActivity(this, 0, acceptIntent, 0);
+        Intent acceptIntent;
 
-//        Intent declineIntent = new Intent(this, TeleMedicineActivity.class);
-//        PendingIntent pendingDeclineIntent = PendingIntent.getActivity(this, 0, declineIntent, 0);
+        if(videoRequested) {
+            acceptIntent = new Intent(this, VideoActivity.class);
+            //pass off the Doctor reference to the video activity:
+            DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+            acceptIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
+        } else {
+            acceptIntent = new Intent(Intent.ACTION_DIAL);
+            acceptIntent.setData(Uri.parse("tel:" + phoneNumber));
+        }
 
-        // Create the reply action and add the remote input.
+        //acceptIntent.setData(Uri.parse("tel:" + phoneNumber));
+        PendingIntent pendingAcceptIntent = PendingIntent.getActivity(this, 0, acceptIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //Get an instance of NotificationManager
         NotificationCompat.Builder mBuilder =
@@ -166,7 +172,8 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
                 if (TextUtils.equals(mDoctorDTO.getUserAccountId(), userChanged.getUserAccountId())) {
                     mDoctorDTO = userChanged;
                     if (mDoctorDTO.isRequested()) {
-                        sendNotification(mDoctorDTO.getRequesterPhoneNumber());
+                      sendNotification(mDoctorDTO.getRequesterPhoneNumber(), mDoctorDTO.getVideoRequested());
+
                     }
                 }
             }
