@@ -120,12 +120,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 attemptLogin();
                 break;
             case R.id.email_register_button:
-                Intent registerActivity = new Intent(LoginActivity.this, RegisterActivity.class);
-                String email = mEmailView.getText().toString();
-                if (!TextUtils.isEmpty(email)) {
-                    registerActivity.putExtra(CommonConstants.EXTRA_EMAIL, email);
-                }
-                LoginActivity.this.startActivity(registerActivity);
+//                Intent registerActivity = new Intent(LoginActivity.this, RegisterActivity.class);
+//                String email = mEmailView.getText().toString();
+//                if (!TextUtils.isEmpty(email)) {
+//                    registerActivity.putExtra(CommonConstants.EXTRA_EMAIL, email);
+//                }
+//                LoginActivity.this.startActivity(registerActivity); TODO: CHANGE BACK!
+                Intent chatActivity = new Intent(LoginActivity.this, ChatActivity.class);
+                LoginActivity.this.startActivity(chatActivity);
                 break;
             case R.id.b_quick_login: // TODO: DEBUG BUTTONS ! REMOVE BEFORE DEPLOYING
                 mEmailView.setText(CommonConstants.DUMMY_PATIENT_EMAIL);
