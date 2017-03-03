@@ -68,10 +68,8 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        //sUserId = getPreferences(Context.MODE_PRIVATE).getString("user_id", "");
-        //mNickname = getPreferences(Context.MODE_PRIVATE).getString("nickname", "");
-        sUserId = "ardina-bmmas";
-        mNickname = "matt";
+        sUserId = getPreferences(Context.MODE_PRIVATE).getString("user_id", "");
+        mNickname = getPreferences(Context.MODE_PRIVATE).getString("nickname", "");
 
         SendBird.init(APP_ID, this);
         connect();
@@ -87,6 +85,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onDisconnected() {}
         });
+        super.onDestroy();
     }
 
     private void initFragment() {
@@ -144,15 +143,15 @@ public class ChatActivity extends AppCompatActivity {
 
                 if (FirebaseInstanceId.getInstance().getToken() == null) return;
 
-                SendBird.registerPushTokenForCurrentUser(FirebaseInstanceId.getInstance().getToken(), true, new SendBird.RegisterPushTokenWithStatusHandler() {
-                    @Override
-                    public void onRegistered(SendBird.PushTokenRegistrationStatus pushTokenRegistrationStatus, SendBirdException e) {
-                        if (e != null) {
-                            Toast.makeText(ChatActivity.this, "" + e.getCode() + ":" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
-                });
+//                SendBird.registerPushTokenForCurrentUser(FirebaseInstanceId.getInstance().getToken(), true, new SendBird.RegisterPushTokenWithStatusHandler() {
+//                    @Override
+//                    public void onRegistered(SendBird.PushTokenRegistrationStatus pushTokenRegistrationStatus, SendBirdException e) {
+//                        if (e != null) {
+//                            Toast.makeText(ChatActivity.this, "" + e.getCode() + ":" + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                            return;
+//                        }
+//                    }
+//                });
             }
         });
 
