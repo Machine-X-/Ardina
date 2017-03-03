@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "24.0.1"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.myardina.buckeyes.myardina"
@@ -33,25 +33,30 @@ android {
     sourceSets { main { jniLibs.srcDirs = ['src/main/jniLibs/'] } }
 }
 
+repositories {
+    maven { url "https://raw.githubusercontent.com/smilefam/SendBird-SDK-Android/master/" }
+}
+
 dependencies {
+    //compile 'com.google.android.gms:play-services:9.6.1'
+    compile fileTree(include: ['*.jar', '*.so'], dir: 'src/main/jniLibs')
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'
-    //compile 'com.google.android.gms:play-services:9.6.1'
-    compile 'com.google.android.gms:play-services-ads:9.6.1'
-    compile 'com.google.android.gms:play-services-identity:9.6.1'
-    compile 'com.google.android.gms:play-services-gcm:9.6.1'
-    compile 'com.google.android.gms:play-services-plus:9.6.1'
-    compile 'com.google.firebase:firebase-core:9.6.1'
-    compile 'com.google.firebase:firebase-database:9.6.1'
-    compile 'com.google.firebase:firebase-messaging:9.6.1'
-    compile 'com.google.firebase:firebase-auth:9.6.1'
+    compile 'com.google.android.gms:play-services-ads:10.2.0'
+    compile 'com.google.android.gms:play-services-identity:10.2.0'
+    compile 'com.google.android.gms:play-services-gcm:10.2.0'
+    compile 'com.google.android.gms:play-services-plus:10.2.0'
+    compile 'com.google.firebase:firebase-core:10.2.0'
+    compile 'com.google.firebase:firebase-database:10.2.0'
+    compile 'com.google.firebase:firebase-messaging:10.2.0'
+    compile 'com.google.firebase:firebase-auth:10.2.0'
     compile 'com.firebase:firebase-client-android:2.5.0'
     compile 'com.firebaseui:firebase-ui:0.3.1'
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.paypal.sdk:paypal-android-sdk:2.15.0'
     compile 'com.android.support.test:testing-support-lib:0.1'
-    compile fileTree(include: ['*.jar', '*.so'], dir: 'src/main/jniLibs')
+    compile 'com.sendbird.sdk:sendbird-android-sdk:3.0.18'
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.6.3'
 }
 
