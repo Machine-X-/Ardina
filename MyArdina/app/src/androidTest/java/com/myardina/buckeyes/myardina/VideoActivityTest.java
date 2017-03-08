@@ -1,17 +1,17 @@
 package com.myardina.buckeyes.myardina;
 
-import android.test.ActivityInstrumentationTestCase2;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ToggleButton;
+        import android.test.ActivityInstrumentationTestCase2;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.ToggleButton;
 
-import com.myardina.buckeyes.myardina.Activity.LoginActivity;
-import com.myardina.buckeyes.myardina.Activity.PatientPaymentActivity;
-import com.myardina.buckeyes.myardina.Activity.SymptomsActivity;
-import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
-import com.myardina.buckeyes.myardina.Sevice.DoctorService;
-import com.myardina.buckeyes.myardina.Sevice.Impl.DoctorServiceImpl;
-import com.robotium.solo.Solo;
+        import com.myardina.buckeyes.myardina.Activity.LoginActivity;
+        import com.myardina.buckeyes.myardina.Activity.PatientPaymentActivity;
+        import com.myardina.buckeyes.myardina.Activity.SymptomsActivity;
+        import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
+        import com.myardina.buckeyes.myardina.Sevice.DoctorService;
+        import com.myardina.buckeyes.myardina.Sevice.Impl.DoctorServiceImpl;
+        import com.robotium.solo.Solo;
 
 /**
  * Created by cryst on 2/19/2017.
@@ -467,3 +467,6 @@ public class VideoActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         solo.finishOpenedActivities();
     }
 }
+
+
+
