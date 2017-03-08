@@ -14,6 +14,7 @@ public class DoctorDTO extends UserDTO {
     private boolean verifiedDoctor;
     private boolean requested;
     private boolean videoRequested;
+    private boolean chatRequested;
 
     public String getLocation() {
         return location;
@@ -22,6 +23,10 @@ public class DoctorDTO extends UserDTO {
     public boolean getVideoRequested() { return videoRequested;}
 
     public void setVideoRequested(boolean videoRequested) { this.videoRequested = videoRequested;}
+
+    public boolean getChatRequested() { return chatRequested;}
+
+    public void setChatRequested(boolean chatRequested) { this.chatRequested = chatRequested;}
 
     public void setLocation(String location) {
         this.location = location;
@@ -67,6 +72,7 @@ public class DoctorDTO extends UserDTO {
         this.verifiedDoctor = in.readByte() != 0;
         this.requested = in.readByte() != 0;
         this.videoRequested = in.readByte() != 0;
+        this.chatRequested = in.readByte() != 0;
     }
 
     @Override
@@ -78,6 +84,8 @@ public class DoctorDTO extends UserDTO {
         dest.writeByte((byte) (verifiedDoctor ? 1 : 0));
         dest.writeByte((byte) (requested ? 1 : 0));
         dest.writeByte((byte)(videoRequested ? 1 : 0));
+        dest.writeByte((byte)(chatRequested ? 1 : 0));
+
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

@@ -126,7 +126,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                    registerActivity.putExtra(CommonConstants.EXTRA_EMAIL, email);
 //                }
 //                LoginActivity.this.startActivity(registerActivity); TODO: CHANGE BACK!
-                Intent chatActivity = new Intent(LoginActivity.this, ChatActivity.class);
+                Intent chatActivity = new Intent(LoginActivity.this, RegisterActivity.class);
                 LoginActivity.this.startActivity(chatActivity);
                 break;
             case R.id.b_quick_login: // TODO: DEBUG BUTTONS ! REMOVE BEFORE DEPLOYING

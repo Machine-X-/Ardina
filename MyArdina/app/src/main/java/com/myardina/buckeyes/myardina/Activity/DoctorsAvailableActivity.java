@@ -165,9 +165,9 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                videoIntent.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
-                videoIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
-                doctorDTO.setVideoRequested(true);
+                chatIntent.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
+                chatIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
+                doctorDTO.setChatRequested(true);
                 doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
                 mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
