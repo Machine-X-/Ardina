@@ -240,7 +240,7 @@ public class ChatActivity extends AppCompatActivity {
                 });
 
                 refreshChannel();
-                loadPrevMessages(true);
+                loadPrevMessages(false);
             } else {
                 mIsUploading = false;
 
@@ -315,7 +315,7 @@ public class ChatActivity extends AppCompatActivity {
                             mOpenChannel = openChannel;
                             ((TextView) getActivity().findViewById(R.id.txt_channel_name)).setText(openChannel.getName());
 
-                            loadPrevMessages(true);
+                            //loadPrevMessages(false);
                         }
                     });
                 }
@@ -386,7 +386,7 @@ public class ChatActivity extends AppCompatActivity {
                 public void onScrollStateChanged(AbsListView view, int scrollState) {
                     if (scrollState == SCROLL_STATE_IDLE) {
                         if (view.getFirstVisiblePosition() == 0 && view.getChildCount() > 0 && view.getChildAt(0).getTop() == 0) {
-                            loadPrevMessages(false);
+                            loadPrevMessages(true);
                         }
                     }
                 }
