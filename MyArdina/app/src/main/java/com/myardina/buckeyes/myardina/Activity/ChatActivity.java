@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.myardina.buckeyes.myardina.Common.CommonConstants;
 import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
 import com.myardina.buckeyes.myardina.DTO.PatientDTO;
 import com.myardina.buckeyes.myardina.R;
@@ -73,8 +74,8 @@ public class ChatActivity extends AppCompatActivity {
         //sUserId = getPreferences(Context.MODE_PRIVATE).getString("user_id", "");
 
         //patient
-        if(getIntent().hasExtra("CommonConstants.PATIENT_DTO")){
-            PatientDTO patient = (PatientDTO) getIntent().getExtras().get("CommonConstants.PATIENT_DTO");
+        if(getIntent().hasExtra(CommonConstants.PATIENT_DTO)){
+            PatientDTO patient = (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);
             if(patient != null){
                 if(patient.getFirstName().length() == 0){
                     sUserId = "Patient";
@@ -90,7 +91,7 @@ public class ChatActivity extends AppCompatActivity {
         }
         //doctor
         else{
-            DoctorDTO doctor = (DoctorDTO) getIntent().getExtras().get("CommonConstants.DOCTOR_DTO");
+            DoctorDTO doctor = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
             if(doctor != null){
                 if(doctor.getFirstName().length() == 0){
                     sUserId = "Doctor";
