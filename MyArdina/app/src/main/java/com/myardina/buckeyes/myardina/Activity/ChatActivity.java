@@ -53,7 +53,7 @@ import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
     private static final String LOG_TAG = "Chat Activity";
-    private static final String APP_ID = "F7820CFC-8546-44D6-93B4-CAB122997F5B";
+    private static final String APP_ID = "27D7EF86-47BE-4756-92E9-339C2803515F";
 
     public static String sUserId;
     private String mNickname;
@@ -68,14 +68,15 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        sUserId = getPreferences(Context.MODE_PRIVATE).getString("user_id", "");
+        //sUserId = getPreferences(Context.MODE_PRIVATE).getString("user_id", "");
+        sUserId = "name";
         mNickname = getPreferences(Context.MODE_PRIVATE).getString("nickname", "");
 
         SendBird.init(APP_ID, this);
         connect();
 
-        initFragment();
-        initUIComponents();
+
+
 
     }
 
@@ -140,6 +141,12 @@ public class ChatActivity extends AppCompatActivity {
                         //now connected
                     }
                 });
+
+                initFragment();
+                initUIComponents();
+
+
+
 
                 if (FirebaseInstanceId.getInstance().getToken() == null) return;
 
