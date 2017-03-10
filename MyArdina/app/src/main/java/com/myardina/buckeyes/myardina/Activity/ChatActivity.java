@@ -33,6 +33,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.myardina.buckeyes.myardina.Common.CommonConstants;
+import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
+import com.myardina.buckeyes.myardina.DTO.PatientDTO;
 import com.myardina.buckeyes.myardina.R;
 import com.myardina.buckeyes.myardina.Common.Helper;
 import com.sendbird.android.AdminMessage;
@@ -69,8 +72,38 @@ public class ChatActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         //sUserId = getPreferences(Context.MODE_PRIVATE).getString("user_id", "");
-        sUserId = "name";
-        mNickname = getPreferences(Context.MODE_PRIVATE).getString("nickname", "");
+
+        //patient
+        if(getIntent().hasExtra(CommonConstants.PATIENT_DTO)){
+            PatientDTO patient = (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);
+            if(patient != null){
+                if(patient.getFirstName().length() == 0){
+                    sUserId = "Patient";
+                    mNickname = "Patient";
+                }
+                else{
+                    sUserId = patient.getFirstName();
+                    mNickname = patient.getFirstName();
+                }
+            }
+
+
+        }
+        //doctor
+        else{
+            DoctorDTO doctor = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+            if(doctor != null){
+                if(doctor.getFirstName().length() == 0){
+                    sUserId = "Doctor";
+                    mNickname = "Doctor";
+                }
+                else{
+                    sUserId = doctor.getFirstName();
+                    mNickname = doctor.getFirstName();
+                }
+            } 
+            
+        }
 
         SendBird.init(APP_ID, this);
         connect();
@@ -122,6 +155,7 @@ public class ChatActivity extends AppCompatActivity {
                     //disconnected
                     return;
                 }
+
 
                 String nickname = mNickname;
 
