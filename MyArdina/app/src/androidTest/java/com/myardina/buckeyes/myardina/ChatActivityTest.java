@@ -255,7 +255,6 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         solo.clickOnView(mToggleConnectButton);
         solo.waitForView(mToggleConnectButton, 4000, false);
 
-
         doctorDTO.setAvailable(false);
         doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
         mDoctorService = new DoctorServiceImpl();
@@ -263,5 +262,7 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
 
     }
 
+    public void testChatActivityConfirmSentMessage() throws Exception{
 
+    }
 }
