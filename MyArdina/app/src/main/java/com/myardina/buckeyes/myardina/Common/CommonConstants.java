@@ -23,6 +23,7 @@ public class CommonConstants {
     public static final String AVAILABLE_COL = "available";
     public static final String REQUESTED_COL = "requested";
     public static final String VIDEO_REQUESTED_COL = "videoRequested";
+    public static final String CHAT_REQUESTED_COL = "chatRequested";
     public static final String LOCATION_COL = "location";
     public static final String PHONE_NUMBER_COL = "phoneNumber";
     public static final String DOCTOR_PAID_COL = "doctorPaid";

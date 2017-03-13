@@ -78,7 +78,7 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
         Log.d(LOG_TAG, "Exiting onCreate...");
     }
 
-    private void sendNotification(String phoneNumber, boolean videoRequested) {
+    private void sendNotification(String phoneNumber, boolean videoRequested, boolean chatRequested) {
         Log.d(LOG_TAG, "Entering sendNotification...");
 
         // Gets an instance of the NotificationManager service
@@ -91,7 +91,14 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
             //pass off the Doctor reference to the video activity:
             DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
             acceptIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-        } else {
+        }
+        else if (chatRequested){
+            acceptIntent = new Intent(this, ChatActivity.class);
+            //pass off the Doctor reference to the video activity:
+            DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+            acceptIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
+        }
+        else {
             acceptIntent = new Intent(Intent.ACTION_DIAL);
             acceptIntent.setData(Uri.parse("tel:" + phoneNumber));
         }
@@ -172,7 +179,7 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
                 if (TextUtils.equals(mDoctorDTO.getUserAccountId(), userChanged.getUserAccountId())) {
                     mDoctorDTO = userChanged;
                     if (mDoctorDTO.isRequested()) {
-                      sendNotification(mDoctorDTO.getRequesterPhoneNumber(), mDoctorDTO.getVideoRequested());
+                      sendNotification(mDoctorDTO.getRequesterPhoneNumber(), mDoctorDTO.getVideoRequested(), mDoctorDTO.getChatRequested());
 
                     }
                 }

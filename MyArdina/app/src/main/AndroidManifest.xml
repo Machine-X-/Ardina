@@ -133,7 +133,7 @@
             android:name=".Activity.ChatActivity"
             android:label="@string/title_activity_chat"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         </activity>
     </application>
 
