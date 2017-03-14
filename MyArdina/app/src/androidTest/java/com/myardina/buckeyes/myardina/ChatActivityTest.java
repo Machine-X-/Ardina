@@ -1,9 +1,11 @@
 package com.myardina.buckeyes.myardina;
 
+import android.provider.Settings;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ToggleButton;
+import android.util.Log;
 
 import com.myardina.buckeyes.myardina.Activity.LoginActivity;
 import com.myardina.buckeyes.myardina.Activity.PatientPaymentActivity;
@@ -12,6 +14,7 @@ import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
 import com.myardina.buckeyes.myardina.Sevice.DoctorService;
 import com.myardina.buckeyes.myardina.Sevice.Impl.DoctorServiceImpl;
 import com.robotium.solo.Solo;
+
 
 /**
  * Created by cryst on 3/8/2017.
@@ -26,7 +29,8 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
 
     @Override
     protected void setUp() throws Exception{
-        solo = new Solo(getInstrumentation(), getActivity());
+            solo = new Solo(getInstrumentation(), getActivity());
+
     }
 
     private DoctorService mDoctorService;
@@ -131,6 +135,8 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         mDoctorService.updateDoctorAvailability(doctorDTO);
         //Sets Doctor availability to true in Firebase
 
+        //added to wait for continue button
+        solo.waitForView(continueButton, 4000, false);
         solo.clickOnView(bypassPayPal);
 
         solo.clickInList(1);
@@ -169,7 +175,7 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         solo.assertCurrentActivity("Expected Symptoms activity", SymptomsActivity.class);
         //click on continue button
         Button continueButton = (Button) solo.getCurrentActivity().findViewById(R.id.b_continue_to_payment);
-        solo.waitForView(continueButton, 4000, false);
+        solo.waitForView(continueButton, 4000, false); //was 4000
         solo.clickOnView(continueButton);
         solo.waitForView(continueButton, 4000, false);
         //wait for and check that next activity is PatientPaymentActivity
@@ -246,12 +252,12 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         solo.clickOnView(bypassPayPal);
 
         solo.clickInList(1);
+        // Click on 3rd button, Chat
         solo.clickOnButton(2);
 
         solo.waitForView(100);
 
         ToggleButton mToggleConnectButton = (ToggleButton) solo.getCurrentActivity().findViewById(R.id.toggleConnectButton);
-        solo.waitForView(mToggleConnectButton, 4000, false);
         solo.clickOnView(mToggleConnectButton);
         solo.waitForView(mToggleConnectButton, 4000, false);
 
@@ -261,8 +267,15 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         mDoctorService.updateDoctorAvailability(doctorDTO);
 
     }
+    @Override
+    protected void tearDown() throws Exception{
+        solo.finishOpenedActivities();
+        super.tearDown();
+    }
 
+/**
     public void testChatActivityConfirmSentMessage() throws Exception{
 
     }
+ **/
 }
