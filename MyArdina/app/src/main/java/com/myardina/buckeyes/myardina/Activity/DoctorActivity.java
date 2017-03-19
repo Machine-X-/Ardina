@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.google.firebase.database.ChildEventListener;
@@ -28,7 +29,7 @@ import com.myardina.buckeyes.myardina.DAO.Impl.DoctorDAOImpl;
 import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
 import com.myardina.buckeyes.myardina.R;
 
-public class DoctorActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnTouchListener {
+public class DoctorActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnTouchListener, View.OnClickListener {
 
     private static final String LOG_TAG = "DOCTOR_ACTIVITY";
 
@@ -55,6 +56,11 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
 //            getSupportActionBar().setHomeButtonEnabled(true);
 //            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        }
+
+
+        // TODO: DEBUG BUTTONS ! REMOVE BEFORE DEPLOYING
+        Button continueButton = (Button) findViewById(R.id.b_debug_to_doctors_chat);
+        continueButton.setOnClickListener(this);
 
         FirebaseDatabase mRef = FirebaseDatabase.getInstance();
         mDoctorsTable = mRef.getReference().child(CommonConstants.DOCTORS_TABLE);
@@ -242,5 +248,19 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
         // Release db listeners
         mDoctorsTable.removeEventListener(mChildEventListener);
         super.onDestroy();
+    }
+
+
+    /* debug button listener*/
+    @Override
+    public void onClick(View view) {
+
+        Intent doctorChatIntent;
+        doctorChatIntent = new Intent(this, ChatActivity.class);
+        //pass off the Doctor reference to the chat activity:
+        DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+        doctorChatIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
+        startActivity(doctorChatIntent);
+
     }
 }
