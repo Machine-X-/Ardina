@@ -671,6 +671,10 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         mDoctorService.updateDoctorAvailability(doctorDTO);
 
     }
-
-
+    //added teardown
+    @Override
+    protected void tearDown() throws Exception {
+        solo.finishOpenedActivities();
+        super.tearDown();
+    }
     }
