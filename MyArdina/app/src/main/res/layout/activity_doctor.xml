@@ -32,4 +32,25 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
+
+
+    <LinearLayout
+        android:id="@+id/continue_button_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/b_debug_to_doctors_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/cont"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
 </RelativeLayout>
