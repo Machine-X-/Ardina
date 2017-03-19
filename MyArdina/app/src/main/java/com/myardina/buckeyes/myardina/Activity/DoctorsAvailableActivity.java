@@ -124,9 +124,12 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
     private void addDialogListeners(View parentView, final DoctorDTO doctorDTO){
         Button phoneButton = (Button)parentView.findViewById(R.id.phone_button);
         Button videoButton = (Button)parentView.findViewById(R.id.video_button);
+        Button chatButton = (Button)parentView.findViewById(R.id.chat_button);
+
 
         final Intent videoIntent = new Intent(this, VideoActivity.class);
         final Intent phoneIntent = new Intent(this, TeleMedicineActivity.class);
+        final Intent chatIntent = new Intent(this, ChatActivity.class);
 
 
         phoneButton.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +159,21 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
                 mDoctorsTable.removeEventListener(mValueEventListener);
                 startActivity(videoIntent);
+            }
+        });
+
+        chatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chatIntent.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
+                chatIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
+                doctorDTO.setChatRequested(true);
+                doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
+                mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
+                mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
+                mDoctorsTable.removeEventListener(mValueEventListener);
+                startActivity(chatIntent);
             }
         });
 
