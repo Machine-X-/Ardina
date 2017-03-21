@@ -274,7 +274,7 @@ public class ChatActivity extends AppCompatActivity {
                 });
 
                 refreshChannel();
-                loadPrevMessages(false);
+                //loadPrevMessages(false);
             } else {
                 mIsUploading = false;
 
@@ -420,7 +420,7 @@ public class ChatActivity extends AppCompatActivity {
                 public void onScrollStateChanged(AbsListView view, int scrollState) {
                     if (scrollState == SCROLL_STATE_IDLE) {
                         if (view.getFirstVisiblePosition() == 0 && view.getChildCount() > 0 && view.getChildAt(0).getTop() == 0) {
-                            loadPrevMessages(true);
+                            //loadPrevMessages(true);
                         }
                     }
                 }
