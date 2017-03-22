@@ -60,4 +60,51 @@
             android:textAlignment="center"
             android:textColor="@color/whitePrimaryText" />
     </LinearLayout>
+
+    <!-- Form for entering patient notes -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/patient_notes_instructions"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:text="@string/patient_notes_prompt"
+        android:textColor="@color/blackPrimaryText"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
+        android:paddingBottom="20dp"
+        android:textAlignment="center"
+        android:layout_below="@id/app_bar"
+        android:visibility="gone"/>
+
+    <!-- notes from doctor -->
+    <EditText
+        android:id ="@+id/patient_notes"
+        android:layout_width ="0dip"
+        android:layout_height ="wrap_content"
+        android:layout_weight ="1"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLines ="4"
+        android:maxLength ="2000"
+        android:hint ="@string/patient_notes_hint"
+        android:scrollHorizontally="false"
+        android:layout_below="@id/patient_notes_instructions"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/send_button"
+        style="actionButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:background="@drawable/login_auth_buttons"
+        android:padding="5dp"
+        android:text="@string/send"
+        android:textAlignment="center"
+        android:textColor="@color/whitePrimaryText"
+        android:layout_below="@id/patient_notes"
+        android:visibility="gone"/>
+
 </RelativeLayout>
