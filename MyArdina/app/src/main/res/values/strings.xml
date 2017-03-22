@@ -62,6 +62,10 @@
     <string name="doctors_available_dialog_title">Select your method of contact</string>
     <string name="chat_button_text">Chat</string>
 
+    <!--Confirmation-->
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirmation_text">Please confirm that the telemedicine appointment was successful or press cancel if the appointment did not occur.</string>
 
     <!--Arrays-->
     <string-array name="doctor_availability_spinner_array">

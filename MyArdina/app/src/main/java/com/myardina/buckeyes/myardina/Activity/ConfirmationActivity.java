@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.myardina.buckeyes.myardina.R;
 
-public class Confirmation extends AppCompatActivity {
+public class ConfirmationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
