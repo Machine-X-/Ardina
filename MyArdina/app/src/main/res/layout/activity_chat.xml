@@ -44,6 +44,8 @@
                     android:textColor="#ffffff"
                     android:text="Loading"
                 />
+
+
             </RelativeLayout>
 
         </LinearLayout>
@@ -60,6 +62,7 @@
             android:layout_height="match_parent"
             android:background="#f0f1f2"
         />
+
     </FrameLayout>
 
         <Button
@@ -87,5 +90,6 @@
             android:text="BLOCKED USERS"
             android:background="@android:color/transparent"
         />
+
 
 </RelativeLayout>
