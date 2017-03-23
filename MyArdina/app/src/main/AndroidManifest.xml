@@ -134,7 +134,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
         <activity
-            android:name=".Activity.Confirmation"
+            android:name=".Activity.ConfirmationActivity"
             android:label="@string/title_activity_confirmation"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
