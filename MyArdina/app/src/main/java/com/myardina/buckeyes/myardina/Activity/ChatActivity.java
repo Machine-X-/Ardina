@@ -232,7 +232,7 @@ public class ChatActivity extends AppCompatActivity {
                 i = new Intent(getContext(), LoginActivity.class);
             }
             else{
-                i = new Intent(getContext(), Confirmation.class);
+                i = new Intent(getContext(), ConfirmationActivity.class);
             }
 
             endChatBtn.setOnClickListener(new View.OnClickListener() {

@@ -4,17 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CallLog;
+import android.provider.Telephony;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.myardina.buckeyes.myardina.Common.CommonConstants;
 import com.myardina.buckeyes.myardina.R;
 
 public class TeleMedicineActivity extends AppCompatActivity  {
 
     private static final String LOG_TAG = "TELE_MEDICINE_ACTIVITY";
+    private boolean isPatient = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,17 @@ public class TeleMedicineActivity extends AppCompatActivity  {
         Log.d(LOG_TAG, "Exiting onCreate...");
     }
 
+    private void navigateAfterCall(){
+        Intent i = null;
+        if(getIntent().hasExtra(CommonConstants.PATIENT_DTO)) {
+            i = new Intent(this, LoginActivity.class);
+        }
+        else if(getIntent().hasExtra(CommonConstants.DOCTOR_DTO)){
+            i = new Intent(this, ConfirmationActivity.class);
+        }
+        startActivity(i);
+    }
+
     //monitor phone call activities
     private class PhoneCallListener extends PhoneStateListener {
 
@@ -61,6 +75,7 @@ public class TeleMedicineActivity extends AppCompatActivity  {
                 isPhoneCalling = true;
             }
 
+
             if (TelephonyManager.CALL_STATE_IDLE == state) {
                 // run when class initial and phone call ended,
                 // need detect flag from CALL_STATE_OFFHOOK
@@ -80,8 +95,13 @@ public class TeleMedicineActivity extends AppCompatActivity  {
 
                     isPhoneCalling = false;
                 }
+                else{
+                    navigateAfterCall();
+                }
             }
             Log.d(LOG_TAG, "Exiting onCallStateChanged...");
         }
+
+
     }
 }
