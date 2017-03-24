@@ -66,6 +66,7 @@ public class VideoActivity extends Activity implements
 
     private boolean isPatient = false;
 
+
     /*
      *  Operating System Events
      */
@@ -379,6 +380,12 @@ public class VideoActivity extends Activity implements
                 i = new Intent(this, ConfirmationActivity.class);
             }
 
+            DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+            i.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
+
+            PatientDTO patientDTO = (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);
+            i.putExtra(CommonConstants.PATIENT_DTO, patientDTO);
+
 
             mToolbarStatus.setText("Disconnecting...");
 
@@ -456,13 +463,13 @@ public class VideoActivity extends Activity implements
         Intent intent = getIntent();
 
         //if video caller is a patient
-        if(intent.hasExtra(CommonConstants.PATIENT_DTO)) {
+        if(!intent.hasExtra("isDoctor")) {
             PatientDTO patientDTO =
                     (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);
             mToken = CommonConstants.PATIENT_TOKEN;
             mDisplayName = patientDTO.getFirstName() + " " + patientDTO.getLastName();
             isPatient = true;
-        } else if(intent.hasExtra(CommonConstants.DOCTOR_DTO)) {
+        } else if(intent.hasExtra("isDoctor")) {
             //otherwise caller is a doctor
             mToken = CommonConstants.DOCTOR_TOKEN;
             DoctorDTO doctorDTO =
