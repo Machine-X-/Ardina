@@ -79,9 +79,8 @@
     <!-- notes from doctor -->
     <EditText
         android:id ="@+id/patient_notes"
-        android:layout_width ="0dip"
+        android:layout_width ="match_parent"
         android:layout_height ="wrap_content"
-        android:layout_weight ="1"
         android:inputType="textCapSentences|textMultiLine"
         android:maxLines ="4"
         android:maxLength ="2000"
@@ -98,13 +97,15 @@
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="16dp"
-        android:layout_weight="1"
         android:background="@drawable/login_auth_buttons"
         android:padding="5dp"
         android:text="@string/send"
         android:textAlignment="center"
         android:textColor="@color/whitePrimaryText"
-        android:layout_below="@id/patient_notes"
-        android:visibility="gone"/>
+        android:visibility="gone"
+    android:layout_below="@id/patient_notes"
+
+    />
+
 
 </RelativeLayout>

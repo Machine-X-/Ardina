@@ -1,6 +1,7 @@
 package com.myardina.buckeyes.myardina.Activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,6 +11,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.myardina.buckeyes.myardina.Common.CommonConstants;
+import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
+import com.myardina.buckeyes.myardina.DTO.PatientDTO;
 import com.myardina.buckeyes.myardina.R;
 
 public class ConfirmationActivity extends AppCompatActivity {
@@ -21,6 +25,8 @@ public class ConfirmationActivity extends AppCompatActivity {
     private TextView mPatientNotesPrompt;
     private EditText mPatientNotes;
     private Button mSendButton;
+    private DoctorDTO mDoctorDTO;
+    private PatientDTO mPatientDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +77,18 @@ public class ConfirmationActivity extends AppCompatActivity {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Setup email intent to patient with the text from mPatientNotes
+
+                mDoctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+                mPatientDTO = (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);
+
+
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto",mPatientDTO.getEmail(), null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Ardina Confirmation");
+                String body = mPatientNotes.getText().toString();
+                emailIntent.putExtra(Intent.EXTRA_TEXT, body);
+                startActivity(Intent.createChooser(emailIntent, "Send email..."));
+
             }
         });
     }

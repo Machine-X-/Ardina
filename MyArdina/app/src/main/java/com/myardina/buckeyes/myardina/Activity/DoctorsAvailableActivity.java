@@ -123,7 +123,7 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
 
     private void addDialogListeners(View parentView, final DoctorDTO doctorDTO){
         Button phoneButton = (Button)parentView.findViewById(R.id.phone_button);
-        Button videoButton = (Button)parentView.findViewById(R.id.video_button);
+        final Button videoButton = (Button)parentView.findViewById(R.id.video_button);
         Button chatButton = (Button)parentView.findViewById(R.id.chat_button);
 
 
@@ -139,6 +139,7 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 phoneIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
                 doctorDTO.setVideoRequested(false);
                 doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+                phoneIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
                 mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
@@ -154,6 +155,7 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 videoIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
                 doctorDTO.setVideoRequested(true);
                 doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+                videoIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
                 mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
@@ -169,6 +171,7 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 chatIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
                 doctorDTO.setChatRequested(true);
                 doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+                chatIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
                 mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
