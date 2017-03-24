@@ -36,6 +36,9 @@ public class ConfirmationActivity extends AppCompatActivity {
         mSendButton = (Button) findViewById(R.id.send_button);
 
         handleConfirmClickListeners();
+
+
+
     }
 
     private void handleConfirmClickListeners() {
@@ -71,5 +74,10 @@ public class ConfirmationActivity extends AppCompatActivity {
                 //TODO: Setup email intent to patient with the text from mPatientNotes
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
     }
 }
