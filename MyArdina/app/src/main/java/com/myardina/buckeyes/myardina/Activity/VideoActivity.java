@@ -64,6 +64,8 @@ public class VideoActivity extends Activity implements
     private String mDisplayName;
     private String mToken;
 
+    private boolean isPatient = false;
+
     /*
      *  Operating System Events
      */
@@ -368,9 +370,23 @@ public class VideoActivity extends Activity implements
             // before swapping to the callStart image.
             mToggleConnectButton.setChecked(true);
 
+            final Intent i;
+
+            if(isPatient){
+                i = new Intent(this, LoginActivity.class);
+            }
+            else{
+                i = new Intent(this, ConfirmationActivity.class);
+            }
+
+
             mToolbarStatus.setText("Disconnecting...");
 
             mVidyoConnector.Disconnect();
+
+            startActivity(i);
+
+
         }
     }
 
@@ -445,6 +461,7 @@ public class VideoActivity extends Activity implements
                     (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);
             mToken = CommonConstants.PATIENT_TOKEN;
             mDisplayName = patientDTO.getFirstName() + " " + patientDTO.getLastName();
+            isPatient = true;
         } else if(intent.hasExtra(CommonConstants.DOCTOR_DTO)) {
             //otherwise caller is a doctor
             mToken = CommonConstants.DOCTOR_TOKEN;

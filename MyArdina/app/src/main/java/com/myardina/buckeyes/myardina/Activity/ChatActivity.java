@@ -60,6 +60,7 @@ public class ChatActivity extends AppCompatActivity {
 
     public static String sUserId;
     private String mNickname;
+    public static boolean isPatient = false;
 
     private SendBirdChatFragment mSendBirdChatFragment;
     private View mTopBarContainer;
@@ -85,6 +86,7 @@ public class ChatActivity extends AppCompatActivity {
                     sUserId = patient.getFirstName();
                     mNickname = patient.getFirstName();
                 }
+                isPatient = true;
             }
 
 
@@ -214,6 +216,8 @@ public class ChatActivity extends AppCompatActivity {
         private OpenChannel mOpenChannel;
         private PreviousMessageListQuery mPrevMessageListQuery;
         private boolean mIsUploading;
+        Button endChatBtn;
+
 
         public SendBirdChatFragment() {
         }
@@ -221,6 +225,22 @@ public class ChatActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_chat, container, false);
+            endChatBtn = (Button)rootView.findViewById(R.id.endChat);
+
+            final Intent i;
+            if(ChatActivity.isPatient){
+                i = new Intent(getContext(), LoginActivity.class);
+            }
+            else{
+                i = new Intent(getContext(), ConfirmationActivity.class);
+            }
+
+            endChatBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(i);
+                }
+            });
 
             mChannelUrl = getArguments().getString("channel_url");
 
