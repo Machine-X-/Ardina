@@ -26,7 +26,6 @@ public class ConfirmationActivity extends AppCompatActivity {
     private EditText mPatientNotes;
     private Button mSendButton;
     private DoctorDTO mDoctorDTO;
-    private PatientDTO mPatientDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +39,8 @@ public class ConfirmationActivity extends AppCompatActivity {
         mPatientNotesPrompt = (TextView) findViewById(R.id.patient_notes_instructions);
         mPatientNotes = (EditText) findViewById(R.id.patient_notes);
         mSendButton = (Button) findViewById(R.id.send_button);
+
+        mDoctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
 
         handleConfirmClickListeners();
 
@@ -67,7 +68,8 @@ public class ConfirmationActivity extends AppCompatActivity {
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent doctorAvailability = new Intent(ConfirmationActivity.this, DoctorsAvailableActivity.class);
+                Intent doctorAvailability = new Intent(ConfirmationActivity.this, DoctorActivity.class);
+                doctorAvailability.putExtra(CommonConstants.DOCTOR_DTO, mDoctorDTO);
                 ConfirmationActivity.this.startActivity(doctorAvailability);
             }
         });
@@ -78,8 +80,6 @@ public class ConfirmationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                mDoctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
-                mPatientDTO = (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);
 
 
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
