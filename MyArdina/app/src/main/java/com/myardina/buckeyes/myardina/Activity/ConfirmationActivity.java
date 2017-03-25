@@ -83,7 +83,7 @@ public class ConfirmationActivity extends AppCompatActivity {
 
 
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto",mPatientDTO.getEmail(), null));
+                        "mailto",mDoctorDTO.getVisitWith(), null));
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Ardina Confirmation");
                 String body = mPatientNotes.getText().toString();
                 emailIntent.putExtra(Intent.EXTRA_TEXT, body);

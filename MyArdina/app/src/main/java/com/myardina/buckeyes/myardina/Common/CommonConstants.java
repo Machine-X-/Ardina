@@ -21,6 +21,7 @@ public class CommonConstants {
     public static final String LAST_NAME_COL = "lastName";
     public static final String REQUESTER_PHONE_NUMBER_COL = "requesterPhoneNumber";
     public static final String AVAILABLE_COL = "available";
+    public static final String VISIT_WITH  = "visitWith";
     public static final String REQUESTED_COL = "requested";
     public static final String VIDEO_REQUESTED_COL = "videoRequested";
     public static final String CHAT_REQUESTED_COL = "chatRequested";
