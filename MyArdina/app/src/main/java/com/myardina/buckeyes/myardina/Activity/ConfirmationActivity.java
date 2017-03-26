@@ -15,6 +15,8 @@ import com.myardina.buckeyes.myardina.Common.CommonConstants;
 import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
 import com.myardina.buckeyes.myardina.DTO.PatientDTO;
 import com.myardina.buckeyes.myardina.R;
+import com.myardina.buckeyes.myardina.Sevice.DoctorService;
+import com.myardina.buckeyes.myardina.Sevice.Impl.DoctorServiceImpl;
 
 public class ConfirmationActivity extends AppCompatActivity {
     private String LOG_TAG = "Confirmation";
@@ -26,6 +28,8 @@ public class ConfirmationActivity extends AppCompatActivity {
     private EditText mPatientNotes;
     private Button mSendButton;
     private DoctorDTO mDoctorDTO;
+    private DoctorService mDoctorService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public class ConfirmationActivity extends AppCompatActivity {
 
         handleConfirmClickListeners();
 
+        mDoctorService = new DoctorServiceImpl();
 
 
     }
@@ -63,6 +68,7 @@ public class ConfirmationActivity extends AppCompatActivity {
                 mDoctorDTO.setVideoRequested(false);
                 mDoctorDTO.setChatRequested(false);
                 mDoctorDTO.setRequested(false);
+                mDoctorService.updateDoctorToNotAvailable(mDoctorDTO);
                 handlePatientNotesForm();
             }
         });
