@@ -96,10 +96,24 @@ public class ConfirmationActivity extends AppCompatActivity {
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Ardina Confirmation");
                 String body = mPatientNotes.getText().toString();
                 emailIntent.putExtra(Intent.EXTRA_TEXT, body);
-                startActivity(Intent.createChooser(emailIntent, "Send email..."));
+                startActivityForResult(Intent.createChooser(emailIntent, "Send email..."),111);
+
 
             }
         });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 111){
+            Intent i = new Intent(getApplicationContext(), DoctorActivity.class);
+            i.putExtra(CommonConstants.DOCTOR_DTO, mDoctorDTO);
+            startActivity(i);
+        }
     }
 
     @Override
