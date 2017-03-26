@@ -141,7 +141,6 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
                 doctorDTO.setVisitWith(mPatientDTO.getEmail());
                 phoneIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
                 mDoctorsTable.removeEventListener(mValueEventListener);
@@ -160,7 +159,6 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
                 doctorDTO.setVisitWith(mPatientDTO.getEmail());
                 videoIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
                 mDoctorsTable.removeEventListener(mValueEventListener);
@@ -178,7 +176,6 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
                 doctorDTO.setVisitWith(mPatientDTO.getEmail());
                 chatIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
                 mDoctorsTable.removeEventListener(mValueEventListener);
@@ -196,6 +193,7 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
         dto.setVideoRequested(false);
         dto.setRequested(false);
         dto.setChatRequested(false);
+        mDoctorService.updateDoctorToNotAvailable(dto);
     }
 
     private void initializeListeners() {
