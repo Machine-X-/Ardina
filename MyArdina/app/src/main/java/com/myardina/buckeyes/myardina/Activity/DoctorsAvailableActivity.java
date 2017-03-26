@@ -145,7 +145,9 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
                 mDoctorsTable.removeEventListener(mValueEventListener);
+                clearRequested(doctorDTO);
                 startActivity(phoneIntent);
+
             }
         });
 
@@ -162,6 +164,7 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
                 mDoctorsTable.removeEventListener(mValueEventListener);
+                clearRequested(doctorDTO);
                 startActivity(videoIntent);
             }
         });
@@ -179,12 +182,20 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
                 mDoctorsTable.removeEventListener(mValueEventListener);
+                clearRequested(doctorDTO);
                 startActivity(chatIntent);
             }
         });
 
 
 
+
+    }
+
+    private void clearRequested(DoctorDTO dto){
+        dto.setVideoRequested(false);
+        dto.setRequested(false);
+        dto.setChatRequested(false);
     }
 
     private void initializeListeners() {

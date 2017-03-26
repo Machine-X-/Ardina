@@ -60,6 +60,9 @@ public class ConfirmationActivity extends AppCompatActivity {
                 mPatientNotesPrompt.setVisibility(View.VISIBLE);
                 mPatientNotes.setVisibility(View.VISIBLE);
                 mSendButton.setVisibility(View.VISIBLE);
+                mDoctorDTO.setVideoRequested(false);
+                mDoctorDTO.setChatRequested(false);
+                mDoctorDTO.setRequested(false);
                 handlePatientNotesForm();
             }
         });
