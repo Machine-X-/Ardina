@@ -16,6 +16,12 @@ public interface DoctorService extends UserService {
     void updateDoctorToNotAvailable(DoctorDTO doctorDTO);
 
     /**
+     * Update requested doctor information.
+     */
+    void updateDoctorToAvailable(DoctorDTO doctorDTO);
+
+
+    /**
      * Update whether or not doctor is available.
      */
     void updateDoctorAvailability(DoctorDTO doctorDTO);

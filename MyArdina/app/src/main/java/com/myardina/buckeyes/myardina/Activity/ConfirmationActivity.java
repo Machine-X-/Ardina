@@ -68,7 +68,7 @@ public class ConfirmationActivity extends AppCompatActivity {
                 mDoctorDTO.setVideoRequested(false);
                 mDoctorDTO.setChatRequested(false);
                 mDoctorDTO.setRequested(false);
-                mDoctorService.updateDoctorToNotAvailable(mDoctorDTO);
+                mDoctorService.updateDoctorToAvailable(mDoctorDTO);
                 handlePatientNotesForm();
             }
         });
