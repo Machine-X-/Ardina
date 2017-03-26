@@ -69,6 +69,11 @@ public class ChatActivity extends AppCompatActivity {
     private static PatientDTO mPatientDTO;
 
     @Override
+    public void onBackPressed() {
+        //do nothing
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
@@ -225,6 +230,8 @@ public class ChatActivity extends AppCompatActivity {
 
         public SendBirdChatFragment() {
         }
+
+
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
