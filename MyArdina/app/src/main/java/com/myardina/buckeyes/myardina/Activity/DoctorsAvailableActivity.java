@@ -141,11 +141,12 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
                 doctorDTO.setVisitWith(mPatientDTO.getEmail());
                 phoneIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
                 mDoctorsTable.removeEventListener(mValueEventListener);
+                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 startActivity(phoneIntent);
+
             }
         });
 
@@ -158,10 +159,10 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
                 doctorDTO.setVisitWith(mPatientDTO.getEmail());
                 videoIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
                 mDoctorsTable.removeEventListener(mValueEventListener);
+                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 startActivity(videoIntent);
             }
         });
@@ -175,13 +176,14 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
                 doctorDTO.setVisitWith(mPatientDTO.getEmail());
                 chatIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
                 mDoctorsTable.removeEventListener(mValueEventListener);
+                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 startActivity(chatIntent);
             }
         });
+
 
 
 

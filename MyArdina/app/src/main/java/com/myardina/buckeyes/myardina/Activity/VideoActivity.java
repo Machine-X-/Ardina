@@ -66,6 +66,11 @@ public class VideoActivity extends Activity implements
 
     private boolean isPatient = false;
 
+    @Override
+    public void onBackPressed() {
+        //do nothing
+    }
+
 
     /*
      *  Operating System Events
