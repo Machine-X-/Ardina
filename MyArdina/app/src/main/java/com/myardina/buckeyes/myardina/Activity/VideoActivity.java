@@ -389,16 +389,11 @@ public class VideoActivity extends Activity implements
 
             }
 
-
-
-
             mToolbarStatus.setText("Disconnecting...");
 
             mVidyoConnector.Disconnect();
 
-            startActivity(i);
-
-
+            this.startActivity(i);
         }
     }
 
