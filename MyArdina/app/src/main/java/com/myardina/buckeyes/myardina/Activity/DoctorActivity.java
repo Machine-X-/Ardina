@@ -27,6 +27,7 @@ import com.myardina.buckeyes.myardina.Common.CommonConstants;
 import com.myardina.buckeyes.myardina.DAO.DoctorDAO;
 import com.myardina.buckeyes.myardina.DAO.Impl.DoctorDAOImpl;
 import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
+import com.myardina.buckeyes.myardina.DTO.PatientDTO;
 import com.myardina.buckeyes.myardina.R;
 
 public class DoctorActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnTouchListener, View.OnClickListener {
@@ -61,6 +62,10 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
         // TODO: DEBUG BUTTONS ! REMOVE BEFORE DEPLOYING
         Button continueButton = (Button) findViewById(R.id.b_debug_to_doctors_chat);
         continueButton.setOnClickListener(this);
+
+        // TODO: DEBUG BUTTON FOR VIDEO ! REMOVE BEFORE DEPLOYING
+        Button continueButtonV = (Button) findViewById(R.id.b_debug_to_doctor_video);
+        continueButtonV.setOnClickListener(this);
 
         FirebaseDatabase mRef = FirebaseDatabase.getInstance();
         mDoctorsTable = mRef.getReference().child(CommonConstants.DOCTORS_TABLE);
@@ -256,13 +261,30 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void onClick(View view) {
 
-        Intent doctorChatIntent;
-        doctorChatIntent = new Intent(this, ChatActivity.class);
-        //pass off the Doctor reference to the chat activity:
-        DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
-        doctorChatIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-        startActivity(doctorChatIntent);
+        DoctorDTO doctorDTO = new DoctorDTO();
+        doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
+        PatientDTO mPatientDTO = new PatientDTO();
 
+
+        doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+        doctorDTO.setVisitWith(mPatientDTO.getEmail());
+
+        if(view == findViewById(R.id.b_debug_to_doctors_chat)) {
+            Intent doctorChatIntent;
+            doctorChatIntent = new Intent(this, ChatActivity.class);
+            //pass off the Doctor reference to the chat activity:
+            doctorChatIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
+            startActivity(doctorChatIntent);
+        }
+        else{
+            Intent doctorVideoIntent;
+            doctorVideoIntent = new Intent(this, VideoActivity.class);
+            doctorDTO.setVideoRequested(true);
+            //pass off the Doctor reference to the video activity:
+            doctorVideoIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
+            startActivity(doctorVideoIntent);
+
+        }
 //        chatIntent.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
 //        chatIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
 //        doctorDTO.setChatRequested(true);

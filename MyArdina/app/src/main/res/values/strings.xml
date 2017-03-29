@@ -55,6 +55,7 @@
     <string name="prompt_phone_number">Phone Number</string>
     <string name="account_details_title">Please Enter Your Account Details for Registration</string>
     <string name="cont">Continue</string>
+    <string name="contV">ContinueV</string>
     <string name="login_to_paypal">Login to Paypal</string>
     <string name="waiting_doc_response">Waiting for the doctors approval…</string>
     <string name="video_button_text">Video call</string>
