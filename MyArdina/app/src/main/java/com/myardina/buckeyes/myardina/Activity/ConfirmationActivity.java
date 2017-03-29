@@ -78,6 +78,10 @@ public class ConfirmationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent doctorAvailability = new Intent(ConfirmationActivity.this, DoctorActivity.class);
                 doctorAvailability.putExtra(CommonConstants.DOCTOR_DTO, mDoctorDTO);
+                mDoctorDTO.setVideoRequested(false);
+                mDoctorDTO.setChatRequested(false);
+                mDoctorDTO.setRequested(false);
+                mDoctorService.updateDoctorToAvailable(mDoctorDTO);
                 ConfirmationActivity.this.startActivity(doctorAvailability);
             }
         });
