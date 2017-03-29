@@ -62,6 +62,10 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
         Button continueButton = (Button) findViewById(R.id.b_debug_to_doctors_chat);
         continueButton.setOnClickListener(this);
 
+        // TODO: DEBUG BUTTON FOR VIDEO ! REMOVE BEFORE DEPLOYING
+        Button continueButtonV = (Button) findViewById(R.id.b_debug_to_doctor_video);
+        continueButtonV.setOnClickListener(this);
+
         FirebaseDatabase mRef = FirebaseDatabase.getInstance();
         mDoctorsTable = mRef.getReference().child(CommonConstants.DOCTORS_TABLE);
 
@@ -255,14 +259,22 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
     /* debug button listener*/
     @Override
     public void onClick(View view) {
-
-        Intent doctorChatIntent;
-        doctorChatIntent = new Intent(this, ChatActivity.class);
-        //pass off the Doctor reference to the chat activity:
-        DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
-        doctorChatIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-        startActivity(doctorChatIntent);
-
+        if(view == findViewById(R.id.b_debug_to_doctors_chat)) {
+            Intent doctorChatIntent;
+            doctorChatIntent = new Intent(this, ChatActivity.class);
+            //pass off the Doctor reference to the chat activity:
+            DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+            doctorChatIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
+            startActivity(doctorChatIntent);
+        }
+        else{
+            Intent doctorVideoIntent;
+            doctorVideoIntent = new Intent(this, VideoActivity.class);
+            //pass off the Doctor reference to the video activity:
+            DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+            doctorVideoIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
+            startActivity(doctorVideoIntent);
+        }
 //        chatIntent.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
 //        chatIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
 //        doctorDTO.setChatRequested(true);
