@@ -10,6 +10,7 @@ public class DoctorDTO extends UserDTO {
 
     private String location;
     private String requesterPhoneNumber;
+    private String visitWith;
     private boolean available;
     private boolean verifiedDoctor;
     private boolean requested;
@@ -60,6 +61,14 @@ public class DoctorDTO extends UserDTO {
         this.requested = requested;
     }
 
+    public String getVisitWith(){
+        return visitWith;
+    }
+
+    public void setVisitWith(String visitWith){
+        this.visitWith = visitWith;
+    }
+
     // PARCEL OBJECT
 
     public DoctorDTO() { super(); }
@@ -73,6 +82,7 @@ public class DoctorDTO extends UserDTO {
         this.requested = in.readByte() != 0;
         this.videoRequested = in.readByte() != 0;
         this.chatRequested = in.readByte() != 0;
+        this.visitWith = in.readString();
     }
 
     @Override
@@ -85,6 +95,7 @@ public class DoctorDTO extends UserDTO {
         dest.writeByte((byte) (requested ? 1 : 0));
         dest.writeByte((byte)(videoRequested ? 1 : 0));
         dest.writeByte((byte)(chatRequested ? 1 : 0));
+        dest.writeString(visitWith);
 
     }
 

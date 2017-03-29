@@ -263,5 +263,17 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
         doctorChatIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
         startActivity(doctorChatIntent);
 
+//        chatIntent.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
+//        chatIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
+//        doctorDTO.setChatRequested(true);
+//        doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+//        doctorDTO.setVisitWith(mPatientDTO.getEmail());
+//        chatIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
+//        mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
+//        mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
+//        mDoctorsTable.removeEventListener(mValueEventListener);
+//        mDoctorService.updateDoctorToNotAvailable(doctorDTO);
+//        startActivity(chatIntent);
+
     }
 }

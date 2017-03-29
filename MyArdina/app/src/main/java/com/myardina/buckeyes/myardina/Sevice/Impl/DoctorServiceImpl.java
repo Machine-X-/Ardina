@@ -64,6 +64,13 @@ public class DoctorServiceImpl extends UserServiceImpl implements DoctorService 
     }
 
     @Override
+    public void updateDoctorToAvailable(DoctorDTO doctorDTO) {
+        Log.d(LOG_TAG, "Entering updateDoctorToAvailable...");
+        mDoctorDAO.updateDoctorToAvailable(doctorDTO);
+        Log.d(LOG_TAG, "Exiting updateDoctorToAvailable...");
+    }
+
+    @Override
     public void updateDoctorAvailability(DoctorDTO doctorDTO) {
         Log.d(LOG_TAG, "Entering updateDoctorAvailability...");
         mDoctorDAO.updateDoctorAvailability(doctorDTO);

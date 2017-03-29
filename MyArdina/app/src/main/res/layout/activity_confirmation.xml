@@ -10,17 +10,18 @@
              layout="@layout/app_bar"/>
 
     <TextView
+        android:id="@+id/confirmation_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/confirmation_text"
+        android:layout_below="@id/app_bar"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="20dp"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:text="@string/confirmation_text"
-        android:textColor="@color/blackPrimaryText"
-        android:layout_marginTop="16dp"
-        android:textSize="18sp"
-        android:paddingBottom="20dp"
         android:textAlignment="center"
-        android:layout_below="@id/app_bar"/>
+        android:textColor="@color/blackPrimaryText"
+        android:textSize="18sp"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,30 +64,30 @@
 
     <!-- Form for entering patient notes -->
     <TextView
+        android:id="@+id/patient_notes_instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/patient_notes_instructions"
+        android:layout_below="@id/app_bar"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="20dp"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:text="@string/patient_notes_prompt"
-        android:textColor="@color/blackPrimaryText"
-        android:layout_marginTop="16dp"
-        android:textSize="18sp"
-        android:paddingBottom="20dp"
         android:textAlignment="center"
-        android:layout_below="@id/app_bar"
+        android:textColor="@color/blackPrimaryText"
+        android:textSize="18sp"
         android:visibility="gone"/>
 
     <!-- notes from doctor -->
     <EditText
-        android:id ="@+id/patient_notes"
-        android:layout_width ="match_parent"
-        android:layout_height ="wrap_content"
-        android:inputType="textCapSentences|textMultiLine"
-        android:maxLines ="4"
-        android:maxLength ="2000"
-        android:hint ="@string/patient_notes_hint"
-        android:scrollHorizontally="false"
+        android:id="@+id/patient_notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/patient_notes_instructions"
+        android:hint="@string/patient_notes_hint"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLength="2000"
+        android:maxLines="4"
+        android:scrollHorizontally="false"
         android:visibility="gone"/>
 
     <Button
@@ -94,6 +95,7 @@
         style="actionButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/patient_notes"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="16dp"
@@ -103,9 +105,8 @@
         android:textAlignment="center"
         android:textColor="@color/whitePrimaryText"
         android:visibility="gone"
-    android:layout_below="@id/patient_notes"
 
-    />
+        />
 
 
 </RelativeLayout>

@@ -55,6 +55,20 @@ public class DoctorDAOImpl extends UserDAOImpl implements DoctorDAO {
     }
 
     @Override
+    public void updateDoctorToAvailable(DoctorDTO doctorDTO){
+        Log.d(LOG_TAG, "Entering updateDoctorToNotAvailable...");
+        Map<String, Object> updateMap = new HashMap<>();
+        updateMap.put(CommonConstants.REQUESTED_COL, false);
+        updateMap.put(CommonConstants.AVAILABLE_COL, true);
+        updateMap.put(CommonConstants.REQUESTER_PHONE_NUMBER_COL, doctorDTO.getRequesterPhoneNumber());
+        updateMap.put(CommonConstants.VIDEO_REQUESTED_COL, doctorDTO.getVideoRequested());
+        updateMap.put(CommonConstants.CHAT_REQUESTED_COL, doctorDTO.getChatRequested());
+        updateMap.put(CommonConstants.VISIT_WITH, doctorDTO.getVisitWith());
+        update(updateMap, CommonConstants.DOCTORS_TABLE, doctorDTO.getTableKey());
+        Log.d(LOG_TAG, "Exiting updateDoctorToNotAvailable...");
+    }
+
+    @Override
     public void updateDoctorToNotAvailable(DoctorDTO doctorDTO) {
         Log.d(LOG_TAG, "Entering updateDoctorToNotAvailable...");
         Map<String, Object> updateMap = new HashMap<>();
@@ -63,6 +77,7 @@ public class DoctorDAOImpl extends UserDAOImpl implements DoctorDAO {
         updateMap.put(CommonConstants.REQUESTER_PHONE_NUMBER_COL, doctorDTO.getRequesterPhoneNumber());
         updateMap.put(CommonConstants.VIDEO_REQUESTED_COL, doctorDTO.getVideoRequested());
         updateMap.put(CommonConstants.CHAT_REQUESTED_COL, doctorDTO.getChatRequested());
+        updateMap.put(CommonConstants.VISIT_WITH, doctorDTO.getVisitWith());
         update(updateMap, CommonConstants.DOCTORS_TABLE, doctorDTO.getTableKey());
         Log.d(LOG_TAG, "Exiting updateDoctorToNotAvailable...");
     }
