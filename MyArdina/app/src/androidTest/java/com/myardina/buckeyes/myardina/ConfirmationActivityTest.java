@@ -241,7 +241,9 @@ public class ConfirmationActivityTest extends ActivityInstrumentationTestCase2<L
           *///solo.clickOnView(mSendButton);
                                             
                                                     
-                                                                }
+    }
+
+
     @Override
     protected void tearDown() throws Exception {
         solo.finishOpenedActivities();
