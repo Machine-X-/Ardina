@@ -66,6 +66,11 @@ public class VideoActivity extends Activity implements
 
     private boolean isPatient = false;
 
+    @Override
+    public void onBackPressed() {
+        //do nothing
+    }
+
 
     /*
      *  Operating System Events
@@ -368,7 +373,7 @@ public class VideoActivity extends Activity implements
             // or abort the connection attempt.
             // Change the button back to the callEnd image because do not want to assume that the Disconnect
             // call will actually end the call. Need to wait for the callback to be received
-            // before swapping to the callStart image.
+            // before swapping t o the callStart image.
             mToggleConnectButton.setChecked(true);
 
             final Intent i;
@@ -378,22 +383,17 @@ public class VideoActivity extends Activity implements
             }
             else{
                 i = new Intent(this, ConfirmationActivity.class);
+
+                DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+                i.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
+
             }
-
-            DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
-            i.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-
-            PatientDTO patientDTO = (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);
-            i.putExtra(CommonConstants.PATIENT_DTO, patientDTO);
-
 
             mToolbarStatus.setText("Disconnecting...");
 
             mVidyoConnector.Disconnect();
 
-            startActivity(i);
-
-
+            this.startActivity(i);
         }
     }
 

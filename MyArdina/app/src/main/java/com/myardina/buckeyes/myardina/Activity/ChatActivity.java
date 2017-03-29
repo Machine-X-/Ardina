@@ -65,6 +65,13 @@ public class ChatActivity extends AppCompatActivity {
     private SendBirdChatFragment mSendBirdChatFragment;
     private View mTopBarContainer;
     private String mChannelUrl = "ardina_bmmas";
+    private static DoctorDTO mDoctorDTO;
+    private static PatientDTO mPatientDTO;
+
+    @Override
+    public void onBackPressed() {
+        //do nothing
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,15 +83,15 @@ public class ChatActivity extends AppCompatActivity {
 
         //patient
         if(getIntent().hasExtra(CommonConstants.PATIENT_DTO)){
-            PatientDTO patient = (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);
-            if(patient != null){
-                if(patient.getFirstName().length() == 0){
+            mPatientDTO = (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);
+            if(mPatientDTO != null){
+                if(mPatientDTO.getFirstName().length() == 0){
                     sUserId = "Patient";
                     mNickname = "Patient";
                 }
                 else{
-                    sUserId = patient.getFirstName();
-                    mNickname = patient.getFirstName();
+                    sUserId = mPatientDTO.getFirstName();
+                    mNickname = mPatientDTO.getFirstName();
                 }
                 isPatient = true;
             }
@@ -93,19 +100,21 @@ public class ChatActivity extends AppCompatActivity {
         }
         //doctor
         else{
-            DoctorDTO doctor = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
-            if(doctor != null){
-                if(doctor.getFirstName().length() == 0){
+            mDoctorDTO= (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+            if(mDoctorDTO != null){
+                if(mDoctorDTO.getFirstName().length() == 0){
                     sUserId = "Doctor";
                     mNickname = "Doctor";
                 }
                 else{
-                    sUserId = doctor.getFirstName();
-                    mNickname = doctor.getFirstName();
+                    sUserId = mDoctorDTO.getFirstName();
+                    mNickname = mDoctorDTO.getFirstName();
                 }
             } 
             
         }
+
+
 
         SendBird.init(APP_ID, this);
         connect();
@@ -222,18 +231,30 @@ public class ChatActivity extends AppCompatActivity {
         public SendBirdChatFragment() {
         }
 
+
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_chat, container, false);
             endChatBtn = (Button)rootView.findViewById(R.id.endChat);
 
+
             final Intent i;
+
+
+
             if(ChatActivity.isPatient){
                 i = new Intent(getContext(), LoginActivity.class);
             }
             else{
                 i = new Intent(getContext(), ConfirmationActivity.class);
+                i.putExtra(CommonConstants.DOCTOR_DTO, ChatActivity.mDoctorDTO);
+
             }
+
+
+
+
 
             endChatBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

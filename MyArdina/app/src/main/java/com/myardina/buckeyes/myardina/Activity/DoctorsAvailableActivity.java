@@ -139,12 +139,14 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 phoneIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
                 doctorDTO.setVideoRequested(false);
                 doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+                doctorDTO.setVisitWith(mPatientDTO.getEmail());
                 phoneIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
                 mDoctorsTable.removeEventListener(mValueEventListener);
+                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 startActivity(phoneIntent);
+
             }
         });
 
@@ -155,11 +157,12 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 videoIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
                 doctorDTO.setVideoRequested(true);
                 doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+                doctorDTO.setVisitWith(mPatientDTO.getEmail());
                 videoIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
                 mDoctorsTable.removeEventListener(mValueEventListener);
+                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 startActivity(videoIntent);
             }
         });
@@ -171,14 +174,16 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 chatIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
                 doctorDTO.setChatRequested(true);
                 doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+                doctorDTO.setVisitWith(mPatientDTO.getEmail());
                 chatIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
                 mDoctorsTable.removeEventListener(mValueEventListener);
+                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
                 startActivity(chatIntent);
             }
         });
+
 
 
 

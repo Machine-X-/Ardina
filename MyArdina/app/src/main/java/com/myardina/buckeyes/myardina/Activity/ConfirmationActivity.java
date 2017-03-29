@@ -13,8 +13,9 @@ import android.widget.TextView;
 
 import com.myardina.buckeyes.myardina.Common.CommonConstants;
 import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
-import com.myardina.buckeyes.myardina.DTO.PatientDTO;
 import com.myardina.buckeyes.myardina.R;
+import com.myardina.buckeyes.myardina.Sevice.DoctorService;
+import com.myardina.buckeyes.myardina.Sevice.Impl.DoctorServiceImpl;
 
 public class ConfirmationActivity extends AppCompatActivity {
     private String LOG_TAG = "Confirmation";
@@ -26,7 +27,8 @@ public class ConfirmationActivity extends AppCompatActivity {
     private EditText mPatientNotes;
     private Button mSendButton;
     private DoctorDTO mDoctorDTO;
-    private PatientDTO mPatientDTO;
+    private DoctorService mDoctorService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +43,11 @@ public class ConfirmationActivity extends AppCompatActivity {
         mPatientNotes = (EditText) findViewById(R.id.patient_notes);
         mSendButton = (Button) findViewById(R.id.send_button);
 
+        mDoctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+
         handleConfirmClickListeners();
 
+        mDoctorService = new DoctorServiceImpl();
 
 
     }
@@ -59,6 +64,10 @@ public class ConfirmationActivity extends AppCompatActivity {
                 mPatientNotesPrompt.setVisibility(View.VISIBLE);
                 mPatientNotes.setVisibility(View.VISIBLE);
                 mSendButton.setVisibility(View.VISIBLE);
+                mDoctorDTO.setVideoRequested(false);
+                mDoctorDTO.setChatRequested(false);
+                mDoctorDTO.setRequested(false);
+                mDoctorService.updateDoctorToAvailable(mDoctorDTO);
                 handlePatientNotesForm();
             }
         });
@@ -67,7 +76,8 @@ public class ConfirmationActivity extends AppCompatActivity {
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent doctorAvailability = new Intent(ConfirmationActivity.this, DoctorsAvailableActivity.class);
+                Intent doctorAvailability = new Intent(ConfirmationActivity.this, DoctorActivity.class);
+                doctorAvailability.putExtra(CommonConstants.DOCTOR_DTO, mDoctorDTO);
                 ConfirmationActivity.this.startActivity(doctorAvailability);
             }
         });
@@ -78,19 +88,31 @@ public class ConfirmationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                mDoctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
-                mPatientDTO = (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);
 
 
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto",mPatientDTO.getEmail(), null));
+                        "mailto",mDoctorDTO.getVisitWith(), null));
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Ardina Confirmation");
                 String body = mPatientNotes.getText().toString();
                 emailIntent.putExtra(Intent.EXTRA_TEXT, body);
-                startActivity(Intent.createChooser(emailIntent, "Send email..."));
+                startActivityForResult(Intent.createChooser(emailIntent, "Send email..."),111);
+
 
             }
         });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 111){
+            Intent i = new Intent(getApplicationContext(), DoctorActivity.class);
+            i.putExtra(CommonConstants.DOCTOR_DTO, mDoctorDTO);
+            startActivity(i);
+        }
     }
 
     @Override
