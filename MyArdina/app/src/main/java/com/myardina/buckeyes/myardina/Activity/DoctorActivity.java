@@ -264,11 +264,13 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
         DoctorDTO doctorDTO = new DoctorDTO();
         doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
         PatientDTO mPatientDTO = new PatientDTO();
+        //mPatientDTO.setTableKey();
 
 
         doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
         doctorDTO.setVisitWith(mPatientDTO.getEmail());
 
+        // Continue to Doctor chat for testing purposes
         if(view == findViewById(R.id.b_debug_to_doctors_chat)) {
             Intent doctorChatIntent;
             doctorChatIntent = new Intent(this, ChatActivity.class);
@@ -276,9 +278,11 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
             doctorChatIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
             startActivity(doctorChatIntent);
         }
+        // Continue to doctor video for testing purposes
         else{
             Intent doctorVideoIntent;
             doctorVideoIntent = new Intent(this, VideoActivity.class);
+            doctorVideoIntent.putExtra("isDoctor", true);
             doctorDTO.setVideoRequested(true);
             //pass off the Doctor reference to the video activity:
             doctorVideoIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);

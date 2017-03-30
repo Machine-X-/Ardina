@@ -109,7 +109,7 @@ public class ConfirmationActivityTest extends ActivityInstrumentationTestCase2<L
     }
 
 
-            /**
+    /**
       * Test that doctor goes to Confirmation Activity after chat ends
       * @throws Exception
       */
@@ -128,7 +128,7 @@ public class ConfirmationActivityTest extends ActivityInstrumentationTestCase2<L
         EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
         solo.enterText(password, "Junit43212!");
             //click sign in button
-                    Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
+        Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);
             //waiting for login in case there is a network delay
         solo.waitForActivity(DoctorActivity.class, 2000);
@@ -141,6 +141,8 @@ public class ConfirmationActivityTest extends ActivityInstrumentationTestCase2<L
         solo.clickInList(0);
 
                 // Continue to go directly to chat session
+        //DoctorDTO mDoctorDTO = new DoctorDTO();
+        //mDoctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
         Button continueBtn = (Button) solo.getCurrentActivity().findViewById(R.id.b_debug_to_doctors_chat);
         solo.clickOnView(continueBtn);
         //waiting for login in case there is a network delay
@@ -237,7 +239,8 @@ public class ConfirmationActivityTest extends ActivityInstrumentationTestCase2<L
         EditText mPatientNotes = (EditText) solo.getCurrentActivity().findViewById(R.id.patient_notes);
         solo.enterText(mPatientNotes, "Test patient notes");
         solo.clickOnView(mSendButton);
-                                                    
+        solo.waitForActivity(DoctorActivity.class, 2000);
+        solo.assertCurrentActivity("Expected Doctor Activity", DoctorActivity.class);
     }
 
     /**
@@ -344,6 +347,7 @@ public class ConfirmationActivityTest extends ActivityInstrumentationTestCase2<L
         DoctorDTO mDoctorDTO = new DoctorDTO();
 
         ToggleButton mToggleConnectButton = (ToggleButton) solo.getCurrentActivity().findViewById(R.id.toggleConnectButton);
+
         solo.clickOnView(mToggleConnectButton);
         //Disconnect from video call
         solo.clickOnView(mToggleConnectButton);
