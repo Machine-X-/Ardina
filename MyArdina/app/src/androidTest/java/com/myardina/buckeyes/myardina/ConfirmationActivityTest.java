@@ -13,6 +13,7 @@ import com.myardina.buckeyes.myardina.Activity.LoginActivity;
 import com.myardina.buckeyes.myardina.Activity.PatientPaymentActivity;
 import com.myardina.buckeyes.myardina.Activity.SymptomsActivity;
 import com.myardina.buckeyes.myardina.Activity.VideoActivity;
+import com.myardina.buckeyes.myardina.Common.CommonConstants;
 import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
 import com.myardina.buckeyes.myardina.DTO.PatientDTO;
 import com.myardina.buckeyes.myardina.Sevice.DoctorService;
@@ -141,8 +142,8 @@ public class ConfirmationActivityTest extends ActivityInstrumentationTestCase2<L
         solo.clickInList(0);
 
                 // Continue to go directly to chat session
-        //DoctorDTO mDoctorDTO = new DoctorDTO();
-        //mDoctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
+        DoctorDTO mDoctorDTO = new DoctorDTO();
+        mDoctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
         Button continueBtn = (Button) solo.getCurrentActivity().findViewById(R.id.b_debug_to_doctors_chat);
         solo.clickOnView(continueBtn);
         //waiting for login in case there is a network delay
@@ -284,6 +285,8 @@ public class ConfirmationActivityTest extends ActivityInstrumentationTestCase2<L
         solo.waitForView(5);
 
         // Send a test message
+        DoctorDTO mDoctorDTO = new DoctorDTO();
+        mDoctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
         Button mBtnSend = (Button) solo.getCurrentActivity().findViewById(R.id.btn_send);
         EditText mEditText = (EditText) solo.getCurrentActivity().findViewById(R.id.etxt_message);
         solo.waitForView(mBtnSend, 4000, false);
@@ -355,7 +358,7 @@ public class ConfirmationActivityTest extends ActivityInstrumentationTestCase2<L
         //Go to Confirmation activity
         solo.waitForActivity(ConfirmationActivity.class, 5000);
         solo.assertCurrentActivity("Expected Confirmation Activity", ConfirmationActivity.class);
-
+        mDoctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
         // Click on Confirm button and go to patient visit form
         Button confirmBtn = (Button) solo.getCurrentActivity().findViewById(R.id.confirm_button);
         solo.waitForView(confirmBtn);
@@ -365,13 +368,14 @@ public class ConfirmationActivityTest extends ActivityInstrumentationTestCase2<L
         // Enter patient notes and send confirmation email
         //PatientDTO mPatientDTO = new PatientDTO();
 
-        mDoctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
+
         //mPatientDTO.setTableKey("-KcduJgyWTwaF4zq39JY");
-        //mDoctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+       // mDoctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
         //mPatientDTO = (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);
         Button mSendButton = (Button) solo.getCurrentActivity().findViewById(R.id.send_button);
         EditText mPatientNotes = (EditText) solo.getCurrentActivity().findViewById(R.id.patient_notes);
         solo.enterText(mPatientNotes, "Test patient notes");
+
         solo.clickOnView(mSendButton);
 
     }
