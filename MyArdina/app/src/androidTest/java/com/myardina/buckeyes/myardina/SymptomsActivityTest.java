@@ -121,8 +121,6 @@ public class SymptomsActivityTest extends ActivityInstrumentationTestCase2<Login
     }
 
 
-
-
     /**
      * Assumption: User has already registered and the account is in the database
      * Clicks on leg and chooses "Pink Eye" for symptom, then on "Migraine" goes to PatientPaymentActivity

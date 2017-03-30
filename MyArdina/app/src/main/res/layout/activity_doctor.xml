@@ -48,7 +48,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:text="@string/contV"
+            android:text="Debug Video"
             android:textStyle="bold" />
 
         <Button
@@ -58,7 +58,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/cont"
+            android:text="Debug Chat"
             android:textStyle="bold" />
 
     </LinearLayout>

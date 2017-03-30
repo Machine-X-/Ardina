@@ -27,7 +27,6 @@ import com.myardina.buckeyes.myardina.Common.CommonConstants;
 import com.myardina.buckeyes.myardina.DAO.DoctorDAO;
 import com.myardina.buckeyes.myardina.DAO.Impl.DoctorDAOImpl;
 import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
-import com.myardina.buckeyes.myardina.DTO.PatientDTO;
 import com.myardina.buckeyes.myardina.R;
 
 public class DoctorActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnTouchListener, View.OnClickListener {
@@ -261,45 +260,35 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void onClick(View view) {
 
-        DoctorDTO doctorDTO = new DoctorDTO();
-        doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
-        PatientDTO mPatientDTO = new PatientDTO();
-        //mPatientDTO.setTableKey();
 
+        DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+//        UserService mUserService = new PatientServiceImpl();
+//        PatientDTO mPatientDTO = (PatientDTO) mUserService.retrieveUser(DataSnapshot.getkey("mrardina-3798e/Patients/-Kcyh14Ky-2zNrr_LhmK"), true);
 
-        doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
-        doctorDTO.setVisitWith(mPatientDTO.getEmail());
+//        doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+//        doctorDTO.setVisitWith(mPatientDTO.getEmail());
 
         // Continue to Doctor chat for testing purposes
         if(view == findViewById(R.id.b_debug_to_doctors_chat)) {
+
             Intent doctorChatIntent;
             doctorChatIntent = new Intent(this, ChatActivity.class);
             //pass off the Doctor reference to the chat activity:
             doctorChatIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
             startActivity(doctorChatIntent);
         }
+
         // Continue to doctor video for testing purposes
         else{
+
             Intent doctorVideoIntent;
             doctorVideoIntent = new Intent(this, VideoActivity.class);
             doctorVideoIntent.putExtra("isDoctor", true);
-            doctorDTO.setVideoRequested(true);
             //pass off the Doctor reference to the video activity:
             doctorVideoIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
             startActivity(doctorVideoIntent);
 
         }
-//        chatIntent.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
-//        chatIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
-//        doctorDTO.setChatRequested(true);
-//        doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
-//        doctorDTO.setVisitWith(mPatientDTO.getEmail());
-//        chatIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-//        mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
-//        mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
-//        mDoctorsTable.removeEventListener(mValueEventListener);
-//        mDoctorService.updateDoctorToNotAvailable(doctorDTO);
-//        startActivity(chatIntent);
 
     }
 }

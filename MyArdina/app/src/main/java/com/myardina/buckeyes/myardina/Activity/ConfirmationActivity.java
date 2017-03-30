@@ -48,8 +48,6 @@ public class ConfirmationActivity extends AppCompatActivity {
         handleConfirmClickListeners();
 
         mDoctorService = new DoctorServiceImpl();
-
-
     }
 
     private void handleConfirmClickListeners() {
@@ -92,15 +90,12 @@ public class ConfirmationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto",mDoctorDTO.getVisitWith(), null));
+                        "mailto", mDoctorDTO.getVisitWith(), null));
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Ardina Confirmation");
                 String body = mPatientNotes.getText().toString();
                 emailIntent.putExtra(Intent.EXTRA_TEXT, body);
                 startActivityForResult(Intent.createChooser(emailIntent, "Send email..."),111);
-
 
             }
         });
