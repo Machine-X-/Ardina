@@ -286,6 +286,7 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
             doctorVideoIntent.putExtra("isDoctor", true);
             //pass off the Doctor reference to the video activity:
             doctorVideoIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
+            doctorVideoIntent.putExtra("isDoctor", true); //just added.
             startActivity(doctorVideoIntent);
 
         }
