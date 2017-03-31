@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
 
+import com.myardina.buckeyes.myardina.Activity.ChatActivity;
 import com.myardina.buckeyes.myardina.Activity.ConfirmationActivity;
 import com.myardina.buckeyes.myardina.Activity.DoctorActivity;
 import com.myardina.buckeyes.myardina.Activity.LoginActivity;
@@ -34,11 +35,11 @@ public class ConfirmationActivityTest extends ActivityInstrumentationTestCase2<L
     private DoctorService mDoctorService;
 
 
-    /**
-     * Assumption: User has already registered and has paypal account
-     * Just test that user can get to paypal app
-     * @throws Exception
-     */
+//    /**
+//     * Assumption: User has already registered and has paypal account
+//     * Just test that user can get to paypal app
+//     * @throws Exception
+//     */
 //    public void testConfirmationActivityPatientVideo() throws Exception{
 //
 //        solo.unlockScreen();
@@ -167,10 +168,9 @@ public class ConfirmationActivityTest extends ActivityInstrumentationTestCase2<L
 //        mDoctorService = new DoctorServiceImpl();
 //        mDoctorService.updateDoctorAvailability(doctorDTO);
 //
-//
 //    }
-
-
+//
+//
 //    /**
 //      * Test that doctor goes to Confirmation Activity after chat ends
 //      * @throws Exception
@@ -231,79 +231,79 @@ public class ConfirmationActivityTest extends ActivityInstrumentationTestCase2<L
 //        mDoctorService.updateDoctorAvailability(doctorDTO);
 //    }
 
-//    /**
-//      * Test that doctor goes to Confirmation Activity after chat ends and
-//      * confirms appointment
-//      * @throws Exception
-//      */
-//    public void testConfirmationActivityDoctorChatConfirm() throws Exception{
-//
-//        solo.unlockScreen();
-//        //This code just logs in and gets to symptom activity,
-//                //repeat of code of testing successful login from login activity test
-//        solo.waitForActivity(LoginActivity.class, 2000);
-//        // check that we have the right activity
-//        solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
-//        //add username
-//        EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
-//        solo.enterText(email, "junit@yahoo.com");
-//        //add password
-//        EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
-//        solo.enterText(password, "Junit43212!");
-//        //click sign in button
-//        Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
-//        solo.clickOnView(loginBtn);
-//        //waiting for login in case there is a network delay
-//        solo.waitForActivity(DoctorActivity.class, 2000);
-//        solo.assertCurrentActivity("Expected Doctor Activity",DoctorActivity.class);
-//
-//        // Set doctor to available
-//        Spinner spinner = (Spinner) solo.getCurrentActivity().findViewById(R.id.spinner_doctor_availability);
-//        solo.waitForView(spinner, 4000, false);
-//        solo.clickOnView(spinner);
-//        solo.clickInList(0);
-//
-//        // Continue to go directly to chat session
-//        Button continueBtn = (Button) solo.getCurrentActivity().findViewById(R.id.b_debug_to_doctors_chat);
-//        solo.clickOnView(continueBtn);
-//        //waiting for login in case there is a network delay
-//        solo.waitForActivity(ChatActivity.class, 2000);
-//        solo.assertCurrentActivity("Expected Chat Activity",ChatActivity.class);
-//        solo.waitForView(5);
-//
-//        // Send a test message
-//        Button mBtnSend = (Button) solo.getCurrentActivity().findViewById(R.id.btn_send);
-//        EditText mEditText = (EditText) solo.getCurrentActivity().findViewById(R.id.etxt_message);
-//        solo.waitForView(mBtnSend, 4000, false);
-//        solo.enterText(mEditText, "TEST1");
-//        solo.clickOnView(mBtnSend);
-//        solo.waitForText("TEST1");
-//
-//        // Click end chat button and go to Confirmation activity
-//        Button endBtn = (Button) solo.getCurrentActivity().findViewById(R.id.endChat);
-//        solo.clickOnView(endBtn);
-//        solo.waitForActivity(ConfirmationActivity.class, 5000);
-//        solo.assertCurrentActivity("Expected Confirmation Activity", ConfirmationActivity.class);
-//
-//        // Click on Confirm button and go to patient visit form
-//        Button confirmBtn = (Button) solo.getCurrentActivity().findViewById(R.id.confirm_button);
-//        solo.waitForView(confirmBtn);
-//        solo.clickOnView(confirmBtn);
-//        solo.waitForActivity(ConfirmationActivity.class, 2000);
-//
-//        Button mSendButton = (Button) solo.getCurrentActivity().findViewById(R.id.send_button);
-//        EditText mPatientNotes = (EditText) solo.getCurrentActivity().findViewById(R.id.patient_notes);
-//        solo.enterText(mPatientNotes, "Test patient notes");
-//        solo.clickOnView(mSendButton);
-//        solo.waitForActivity(DoctorActivity.class, 2000);
-//        solo.assertCurrentActivity("Expected Doctor Activity", DoctorActivity.class);
-//
-//        DoctorDTO doctorDTO = new DoctorDTO();
-//        doctorDTO.setAvailable(false);
-//        doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
-//        mDoctorService = new DoctorServiceImpl();
-//        mDoctorService.updateDoctorAvailability(doctorDTO);
-//    }
+    /**
+      * Test that doctor goes to Confirmation Activity after chat ends and
+      * confirms appointment
+      * @throws Exception
+      */
+    public void testConfirmationActivityDoctorChatConfirm() throws Exception{
+
+        solo.unlockScreen();
+        //This code just logs in and gets to symptom activity,
+                //repeat of code of testing successful login from login activity test
+        solo.waitForActivity(LoginActivity.class, 2000);
+        // check that we have the right activity
+        solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
+        //add username
+        EditText email = (EditText) solo.getCurrentActivity().findViewById(R.id.email);
+        solo.enterText(email, "junit@yahoo.com");
+        //add password
+        EditText password = (EditText) solo.getCurrentActivity().findViewById(R.id.password);
+        solo.enterText(password, "Junit43212!");
+        //click sign in button
+        Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
+        solo.clickOnView(loginBtn);
+        //waiting for login in case there is a network delay
+        solo.waitForActivity(DoctorActivity.class, 2000);
+        solo.assertCurrentActivity("Expected Doctor Activity",DoctorActivity.class);
+
+        // Set doctor to available
+        Spinner spinner = (Spinner) solo.getCurrentActivity().findViewById(R.id.spinner_doctor_availability);
+        solo.waitForView(spinner, 4000, false);
+        solo.clickOnView(spinner);
+        solo.clickInList(0);
+
+        // Continue to go directly to chat session
+        Button continueBtn = (Button) solo.getCurrentActivity().findViewById(R.id.b_debug_to_doctors_chat);
+        solo.clickOnView(continueBtn);
+        //waiting for login in case there is a network delay
+        solo.waitForActivity(ChatActivity.class, 2000);
+        solo.assertCurrentActivity("Expected Chat Activity",ChatActivity.class);
+        solo.waitForView(5);
+
+        // Send a test message
+        Button mBtnSend = (Button) solo.getCurrentActivity().findViewById(R.id.btn_send);
+        EditText mEditText = (EditText) solo.getCurrentActivity().findViewById(R.id.etxt_message);
+        solo.waitForView(mBtnSend, 4000, false);
+        solo.enterText(mEditText, "TEST1");
+        solo.clickOnView(mBtnSend);
+        solo.waitForText("TEST1");
+
+        // Click end chat button and go to Confirmation activity
+        Button endBtn = (Button) solo.getCurrentActivity().findViewById(R.id.endChat);
+        solo.clickOnView(endBtn);
+        solo.waitForActivity(ConfirmationActivity.class, 2000);
+        solo.assertCurrentActivity("Expected Confirmation Activity", ConfirmationActivity.class);
+
+        // Click on Confirm button and go to patient visit form
+        Button confirmBtn = (Button) solo.getCurrentActivity().findViewById(R.id.confirm_button);
+        solo.waitForView(confirmBtn);
+        solo.clickOnView(confirmBtn);
+        solo.waitForActivity(ConfirmationActivity.class, 2000);
+
+        Button mSendButton = (Button) solo.getCurrentActivity().findViewById(R.id.send_button);
+        EditText mPatientNotes = (EditText) solo.getCurrentActivity().findViewById(R.id.patient_notes);
+        solo.enterText(mPatientNotes, "Test patient notes");
+        solo.clickOnView(mSendButton);
+        solo.waitForActivity(DoctorActivity.class, 2000);
+        solo.assertCurrentActivity("Expected Doctor Activity", DoctorActivity.class);
+
+        DoctorDTO doctorDTO = new DoctorDTO();
+        doctorDTO.setAvailable(false);
+        doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
+        mDoctorService = new DoctorServiceImpl();
+        mDoctorService.updateDoctorAvailability(doctorDTO);
+    }
 
 //    /**
 //     * Test that doctor goes to Confirmation Activity after chat ends and
@@ -346,8 +346,6 @@ public class ConfirmationActivityTest extends ActivityInstrumentationTestCase2<L
 //        solo.waitForView(5);
 //
 //        // Send a test message
-//        DoctorDTO mDoctorDTO = new DoctorDTO();
-//        mDoctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
 //        Button mBtnSend = (Button) solo.getCurrentActivity().findViewById(R.id.btn_send);
 //        EditText mEditText = (EditText) solo.getCurrentActivity().findViewById(R.id.etxt_message);
 //        solo.waitForView(mBtnSend, 4000, false);
@@ -441,6 +439,8 @@ public class ConfirmationActivityTest extends ActivityInstrumentationTestCase2<L
         mDoctorService.updateDoctorAvailability(doctorDTO);
 
     }
+
+
     @Override
     protected void tearDown() throws Exception {
         solo.finishOpenedActivities();
