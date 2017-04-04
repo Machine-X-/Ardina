@@ -96,5 +96,6 @@
 
     <!-- Chat -->
     <string name="endChatString">End Chat</string>
+    <string name="title_activity_rating">RatingActivity</string>
 
 </resources>
