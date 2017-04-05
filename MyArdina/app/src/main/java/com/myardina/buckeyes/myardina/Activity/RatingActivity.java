@@ -26,8 +26,7 @@ public class RatingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         //Text
         mRatingHeader = (TextView) findViewById(R.id.rating_header);
@@ -39,6 +38,7 @@ public class RatingActivity extends AppCompatActivity {
                 R.array.rating_values, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mRatingSpinner.setAdapter(adapter);
+
 
         //Buttons
         mSubmitButton = (Button) findViewById(R.id.submit_button);

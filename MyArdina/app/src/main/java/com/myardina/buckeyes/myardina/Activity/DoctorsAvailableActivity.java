@@ -29,6 +29,7 @@ import com.myardina.buckeyes.myardina.Sevice.Impl.DoctorServiceImpl;
 import com.myardina.buckeyes.myardina.Sevice.Impl.PaymentServiceImpl;
 import com.myardina.buckeyes.myardina.Sevice.PaymentService;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +45,8 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
     private PaymentService mPaymentService;
     private PatientDTO mPatientDTO;
     private PaymentDTO mPaymentDTO;
+    private DecimalFormat df = new DecimalFormat("#.##");
+
 
     private DatabaseReference mDoctorsTable;
 
@@ -200,9 +203,14 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 Log.d(LOG_TAG, "Entering onDataChange...");
                 names.clear();
                 List<DoctorDTO> availableDoctors = mDoctorService.retrieveAvailableDoctors(dataSnapshot);
+
                 for (DoctorDTO doctor : availableDoctors) {
+
+                    double ratingAverage = (doctor.getRatingCount() == 0) ? 0 : doctor.getTotalRatingPoints() / (double)doctor.getRatingCount();
+
                     userKeys.put(names.size(), doctor.getTableKey());
-                    String name = doctor.getFirstName() + CommonConstants.SPACE + doctor.getLastName();
+                    String name = doctor.getFirstName() + CommonConstants.SPACE + doctor.getLastName() + CommonConstants.SPACE
+                            + df.format(ratingAverage);
                     Log.d(LOG_TAG, "Name: " + name);
                     names.add(name);
                 }
@@ -289,4 +297,6 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
         System.out.println("onDestroy method for LoginActivity being called");
         super.onDestroy();
     }
+
+
 }
