@@ -100,7 +100,7 @@ public class ChatActivity extends AppCompatActivity {
         }
         //doctor
         else{
-            mDoctorDTO= (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+            mDoctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
             if(mDoctorDTO != null){
                 if(mDoctorDTO.getFirstName().length() == 0){
                     sUserId = "Doctor";
@@ -114,13 +114,8 @@ public class ChatActivity extends AppCompatActivity {
             
         }
 
-
-
         SendBird.init(APP_ID, this);
         connect();
-
-
-
 
     }
 
@@ -191,8 +186,6 @@ public class ChatActivity extends AppCompatActivity {
                 initUIComponents();
 
 
-
-
                 if (FirebaseInstanceId.getInstance().getToken() == null) return;
 
 //                SendBird.registerPushTokenForCurrentUser(FirebaseInstanceId.getInstance().getToken(), true, new SendBird.RegisterPushTokenWithStatusHandler() {
@@ -228,20 +221,16 @@ public class ChatActivity extends AppCompatActivity {
         Button endChatBtn;
 
 
+
         public SendBirdChatFragment() {
         }
-
-
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_chat, container, false);
             endChatBtn = (Button)rootView.findViewById(R.id.endChat);
 
-
             final Intent i;
-
-
 
             if(ChatActivity.isPatient){
                 i = new Intent(getContext(), LoginActivity.class);
@@ -251,10 +240,6 @@ public class ChatActivity extends AppCompatActivity {
                 i.putExtra(CommonConstants.DOCTOR_DTO, ChatActivity.mDoctorDTO);
 
             }
-
-
-
-
 
             endChatBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

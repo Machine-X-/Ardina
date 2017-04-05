@@ -28,6 +28,8 @@ import com.myardina.buckeyes.myardina.DAO.DoctorDAO;
 import com.myardina.buckeyes.myardina.DAO.Impl.DoctorDAOImpl;
 import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
 import com.myardina.buckeyes.myardina.R;
+import com.myardina.buckeyes.myardina.Sevice.DoctorService;
+import com.myardina.buckeyes.myardina.Sevice.Impl.DoctorServiceImpl;
 
 public class DoctorActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnTouchListener, View.OnClickListener {
 
@@ -65,6 +67,14 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
         // TODO: DEBUG BUTTON FOR VIDEO ! REMOVE BEFORE DEPLOYING
         Button continueButtonV = (Button) findViewById(R.id.b_debug_to_doctor_video);
         continueButtonV.setOnClickListener(this);
+
+        /*** Testing without the debug button ***/
+        //continueButton.setVisibility(View.GONE);
+
+
+        /*** Testing without the debug button ***/
+        //continueButtonV.setVisibility(View.GONE);
+
 
         FirebaseDatabase mRef = FirebaseDatabase.getInstance();
         mDoctorsTable = mRef.getReference().child(CommonConstants.DOCTORS_TABLE);
@@ -260,19 +270,17 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void onClick(View view) {
 
-
         DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
-//        UserService mUserService = new PatientServiceImpl();
-//        PatientDTO mPatientDTO = (PatientDTO) mUserService.retrieveUser(DataSnapshot.getkey("mrardina-3798e/Patients/-Kcyh14Ky-2zNrr_LhmK"), true);
-
-//        doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
-//        doctorDTO.setVisitWith(mPatientDTO.getEmail());
+        doctorDTO.setVisitWith("ceballos.2@osu.edu");
+        doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
+        DoctorService mDoctorService = new DoctorServiceImpl();
+        mDoctorService.updateDoctorAvailability(doctorDTO);
 
         // Continue to Doctor chat for testing purposes
         if(view == findViewById(R.id.b_debug_to_doctors_chat)) {
 
             Intent doctorChatIntent;
-            doctorChatIntent = new Intent(this, ChatActivity.class);
+            doctorChatIntent = new Intent(DoctorActivity.this, ChatActivity.class);
             //pass off the Doctor reference to the chat activity:
             doctorChatIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
             startActivity(doctorChatIntent);
@@ -282,10 +290,11 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
         else{
 
             Intent doctorVideoIntent;
-            doctorVideoIntent = new Intent(this, VideoActivity.class);
-            doctorVideoIntent.putExtra("isDoctor", true);
+            doctorVideoIntent = new Intent(DoctorActivity.this, VideoActivity.class);
+//            doctorVideoIntent.putExtra("isDoctor", true);
             //pass off the Doctor reference to the video activity:
             doctorVideoIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
+            doctorVideoIntent.putExtra("isDoctor", true); //just added.
             startActivity(doctorVideoIntent);
 
         }

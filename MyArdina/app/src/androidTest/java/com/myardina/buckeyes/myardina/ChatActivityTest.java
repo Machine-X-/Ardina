@@ -43,7 +43,7 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 2000);
+        solo.waitForActivity(LoginActivity.class, 1000);
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
@@ -100,7 +100,7 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 2000);
+        solo.waitForActivity(LoginActivity.class, 1000);
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
@@ -158,7 +158,7 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 2000);
+        solo.waitForActivity(LoginActivity.class, 1000);
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
@@ -216,7 +216,7 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 2000);
+        solo.waitForActivity(LoginActivity.class, 1000);
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
@@ -284,7 +284,7 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 2000);
+        solo.waitForActivity(LoginActivity.class, 1000);
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
@@ -352,7 +352,7 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 2000);
+        solo.waitForActivity(LoginActivity.class, 1000);
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
@@ -424,7 +424,7 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 2000);
+        solo.waitForActivity(LoginActivity.class, 1000);
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
@@ -468,7 +468,7 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 2000);
+        solo.waitForActivity(LoginActivity.class, 1000);
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
@@ -513,7 +513,7 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 2000);
+        solo.waitForActivity(LoginActivity.class, 1000);
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
@@ -565,7 +565,7 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 2000);
+        solo.waitForActivity(LoginActivity.class, 1000);
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
@@ -619,7 +619,7 @@ public class ChatActivityTest extends ActivityInstrumentationTestCase2<LoginActi
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
-        solo.waitForActivity(LoginActivity.class, 2000);
+        solo.waitForActivity(LoginActivity.class, 1000);
         // check that we have the right activity
         solo.assertCurrentActivity("Expected Login activity", LoginActivity.class);
         //add username
