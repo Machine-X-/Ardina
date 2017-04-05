@@ -59,14 +59,14 @@ public class RatingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mDoctorDTO.setRatingCount(mDoctorDTO.getRatingCount() + 1);
-                int score = (Integer) mRatingSpinner.getSelectedItem();
+                int score = Integer.parseInt((String)mRatingSpinner.getSelectedItem());
                 mDoctorDTO.setTotalRatingPoints(mDoctorDTO.getTotalRatingPoints() + score);
                 DoctorServiceImpl doctorService = new DoctorServiceImpl();
                 doctorService.updateDoctorRating(mDoctorDTO);
                 mSubmitButton.setEnabled(false);
                 mCancelButton.setEnabled(false);
-                Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT);
                 createDelay();
+                Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
                 redirectToLogin();
             }
         });
