@@ -84,4 +84,11 @@ public class DoctorServiceImpl extends UserServiceImpl implements DoctorService 
         Log.d(LOG_TAG, "Exiting retrieveAvailableDoctors...");
         return availableDoctors;
     }
+
+    @Override
+    public void updateDoctorRating(DoctorDTO doctorDTO) {
+        Log.d(LOG_TAG, "Entering updateDoctorRating...");
+        mDoctorDAO.updateDoctorRating(doctorDTO);
+        Log.d(LOG_TAG, "Exiting updateDoctorRating...");
+    }
 }
