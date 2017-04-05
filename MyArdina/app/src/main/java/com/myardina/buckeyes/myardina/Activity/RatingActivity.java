@@ -28,4 +28,8 @@ public class RatingActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        //block backing out
+    }
 }

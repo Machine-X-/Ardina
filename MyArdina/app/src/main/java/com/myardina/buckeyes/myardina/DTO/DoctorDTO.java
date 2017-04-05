@@ -11,6 +11,8 @@ public class DoctorDTO extends UserDTO {
     private String location;
     private String requesterPhoneNumber;
     private String visitWith;
+    private int totalRatingPoints;
+    private int ratingCount;
     private boolean available;
     private boolean verifiedDoctor;
     private boolean requested;
@@ -69,6 +71,14 @@ public class DoctorDTO extends UserDTO {
         this.visitWith = visitWith;
     }
 
+    public void setTotalRatingPoints(int totalRatingPoints){ this.totalRatingPoints = totalRatingPoints;}
+
+    public int getTotalRatingPoints(){ return totalRatingPoints; };
+
+    public void setRatingCount(int ratingCount) { this.ratingCount = ratingCount;}
+
+    public int getRatingCount(){ return ratingCount; }
+
     // PARCEL OBJECT
 
     public DoctorDTO() { super(); }
@@ -83,6 +93,8 @@ public class DoctorDTO extends UserDTO {
         this.videoRequested = in.readByte() != 0;
         this.chatRequested = in.readByte() != 0;
         this.visitWith = in.readString();
+        this.ratingCount = in.readInt();
+        this.totalRatingPoints = in.readInt();
     }
 
     @Override
@@ -96,6 +108,8 @@ public class DoctorDTO extends UserDTO {
         dest.writeByte((byte)(videoRequested ? 1 : 0));
         dest.writeByte((byte)(chatRequested ? 1 : 0));
         dest.writeString(visitWith);
+        dest.writeInt(ratingCount);
+        dest.writeInt(totalRatingPoints);
 
     }
 

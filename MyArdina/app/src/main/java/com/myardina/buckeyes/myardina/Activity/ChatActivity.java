@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Rating;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -244,15 +245,14 @@ public class ChatActivity extends AppCompatActivity {
 
 
             if(ChatActivity.isPatient){
-                i = new Intent(getContext(), LoginActivity.class);
+                i = new Intent(getContext(), RatingActivity.class);
             }
             else{
                 i = new Intent(getContext(), ConfirmationActivity.class);
-                i.putExtra(CommonConstants.DOCTOR_DTO, ChatActivity.mDoctorDTO);
 
             }
 
-
+            i.putExtra(CommonConstants.DOCTOR_DTO, ChatActivity.mDoctorDTO);
 
 
 
