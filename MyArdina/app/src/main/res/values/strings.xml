@@ -71,6 +71,19 @@
     <string name="patient_notes_hint">Enter medical notes here</string>
     <string name="send">Send</string>
 
+    <!--Rating-->
+    <string name="rating_title">Rate</string>
+    <string name="rating_prompt">Please rate your interaction with this doctor, or press cancel.</string>
+    <string name="rating_submit">Submit</string>
+    <string-array name="rating_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
     <!--Arrays-->
     <string-array name="doctor_availability_spinner_array">
         <item>Available</item>

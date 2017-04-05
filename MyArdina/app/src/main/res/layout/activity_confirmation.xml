@@ -29,7 +29,9 @@
         android:id="@+id/confirmation_buttons"
         android:orientation="horizontal"
         android:weightSum="2"
-        android:layout_below="@id/confirmation_text">
+        android:layout_below="@id/confirmation_text"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin">
 
         <Button
             android:id="@+id/confirm_button"

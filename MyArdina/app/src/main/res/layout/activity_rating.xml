@@ -1,33 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.myardina.buckeyes.myardina.Activity.RatingActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/activity_confirmation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".Activity.ConfirmationActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppBarOverlay">
+    <include android:id="@+id/app_bar"
+             layout="@layout/app_bar"/>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_rating" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <TextView
+        android:id="@+id/rating_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_below="@id/app_bar"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="20dp"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:text="@string/rating_title"
+        android:textAlignment="center"
+        android:textColor="@color/blackPrimaryText"
+        android:textSize="30sp"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+    />
 
-</android.support.design.widget.CoordinatorLayout>
+    <TextView
+        android:id="@+id/rating_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="20dp"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:text="@string/rating_prompt"
+        android:textAlignment="center"
+        android:textColor="@color/blackPrimaryText"
+        android:textSize="18sp"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_below="@id/rating_header"
+    />
+
+    <Spinner
+        android:id="@+id/rating_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rating_prompt"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/confirmation_buttons"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_below="@id/rating_spinner">
+
+        <Button
+            android:id="@+id/submit_button"
+            style="actionButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/login_auth_buttons"
+            android:padding="5dp"
+            android:text="@string/rating_submit"
+            android:textAlignment="center"
+            android:textColor="@color/whitePrimaryText" />
+
+        <Button
+            android:id="@+id/cancel_button"
+            style="actionButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/login_auth_buttons"
+            android:padding="5dp"
+            android:text="@string/cancel"
+            android:textAlignment="center"
+            android:textColor="@color/whitePrimaryText" />
+    </LinearLayout>
+
+</RelativeLayout>
