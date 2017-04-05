@@ -81,6 +81,7 @@ public class ChatActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         //sUserId = getPreferences(Context.MODE_PRIVATE).getString("user_id", "");
+        mDoctorDTO= (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
 
         //patient
         if(getIntent().hasExtra(CommonConstants.PATIENT_DTO)){
@@ -101,7 +102,6 @@ public class ChatActivity extends AppCompatActivity {
         }
         //doctor
         else{
-            mDoctorDTO= (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
             if(mDoctorDTO != null){
                 if(mDoctorDTO.getFirstName().length() == 0){
                     sUserId = "Doctor";
@@ -239,17 +239,13 @@ public class ChatActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_chat, container, false);
             endChatBtn = (Button)rootView.findViewById(R.id.endChat);
 
-
             final Intent i;
-
-
 
             if(ChatActivity.isPatient){
                 i = new Intent(getContext(), RatingActivity.class);
             }
             else{
                 i = new Intent(getContext(), ConfirmationActivity.class);
-
             }
 
             i.putExtra(CommonConstants.DOCTOR_DTO, ChatActivity.mDoctorDTO);
