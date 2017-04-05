@@ -8,12 +8,17 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.myardina.buckeyes.myardina.Common.CommonConstants;
+import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
 import com.myardina.buckeyes.myardina.R;
+import com.myardina.buckeyes.myardina.Sevice.Impl.DoctorServiceImpl;
 
 public class RatingActivity extends AppCompatActivity {
 
@@ -21,17 +26,18 @@ public class RatingActivity extends AppCompatActivity {
     private Spinner mRatingSpinner;
     private Button mSubmitButton;
     private Button mCancelButton;
+    private DoctorDTO mDoctorDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        mDoctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
 
         //Text
         mRatingHeader = (TextView) findViewById(R.id.rating_header);
-        mRatingHeader.append(" This Doctor"); //TODO: append doctor's actual name
+        mRatingHeader.append(" " + mDoctorDTO.getFirstName() + " " + mDoctorDTO.getLastName());
 
         //Spinner
         mRatingSpinner = (Spinner) findViewById(R.id.rating_spinner);
@@ -52,9 +58,16 @@ public class RatingActivity extends AppCompatActivity {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: update doctor's rating, then show success message
-                Intent login = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(login);
+                mDoctorDTO.setRatingCount(mDoctorDTO.getRatingCount() + 1);
+                int score = (Integer) mRatingSpinner.getSelectedItem();
+                mDoctorDTO.setTotalRatingPoints(mDoctorDTO.getTotalRatingPoints() + score);
+                DoctorServiceImpl doctorService = new DoctorServiceImpl();
+                doctorService.updateDoctorRating(mDoctorDTO);
+                mSubmitButton.setEnabled(false);
+                mCancelButton.setEnabled(false);
+                Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT);
+                createDelay();
+                redirectToLogin();
             }
         });
 
@@ -72,8 +85,24 @@ public class RatingActivity extends AppCompatActivity {
         startActivity(login);
     }
 
+    private void createDelay() {
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try{
+                    Thread.sleep(3500);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        };
+        thread.start();
+    }
+
     @Override
     public void onBackPressed() {
         //block backing out
     }
+
 }

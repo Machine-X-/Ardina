@@ -30,4 +30,9 @@ public interface DoctorService extends UserService {
      * Retrieve a list of doctors that are verified and available.
      */
     List<DoctorDTO> retrieveAvailableDoctors(DataSnapshot snapshot);
+
+    /**
+     * Update doctor's rating score
+     */
+    void updateDoctorRating(DoctorDTO doctorDTO);
 }

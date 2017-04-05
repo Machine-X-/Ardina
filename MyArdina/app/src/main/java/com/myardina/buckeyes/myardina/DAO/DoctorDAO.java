@@ -29,4 +29,9 @@ public interface DoctorDAO extends UserDAO {
      * Retrieve a list of all doctors that are available and verified
      */
     List<DoctorDTO> retrieveAvailableDoctors(DataSnapshot snapshot);
+
+    /**
+     * Update a doctor's rating score
+     */
+    void updateDoctorRating(DoctorDTO doctorDTO);
 }
