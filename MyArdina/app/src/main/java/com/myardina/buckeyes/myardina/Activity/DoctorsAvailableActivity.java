@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -45,7 +46,10 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
     private PaymentService mPaymentService;
     private PatientDTO mPatientDTO;
     private PaymentDTO mPaymentDTO;
+    private DoctorDTO mDoctorDTO;
     private DecimalFormat df = new DecimalFormat("#.##");
+    private AlertDialog talkDialog;
+    private ArrayList<DoctorDTO> activeDoctorsList;
 
 
     private DatabaseReference mDoctorsTable;
@@ -53,6 +57,7 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
     private ArrayAdapter<String> mAdapter;
     private List<String> names;
     private Map<Integer, String> userKeys;
+    private Map<Integer, DoctorDTO> doctorKeys;
 
     // Listeners
     private ValueEventListener mValueEventListener;
@@ -67,7 +72,7 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         //setting back button
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -76,12 +81,13 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
 
         names = new ArrayList<>();
         userKeys = new HashMap<>();
+        activeDoctorsList = new ArrayList<>();
+        doctorKeys = new HashMap<>();
 
         final ListView lvDoctorListView = (ListView) findViewById(R.id.lvDoctorsAvailableList);
         lvDoctorListView.setOnItemClickListener(mOnItemClickListener);
         mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, names);
         lvDoctorListView.setAdapter(mAdapter);
-
 
         mPatientDTO = (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);
         mPaymentDTO = (PaymentDTO) getIntent().getExtras().get(CommonConstants.PAYMENT_DTO);
@@ -94,10 +100,13 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "Exiting onCreate...");
 
         updateList();
+        View alertDialogView = createSpeakMethodDialog();
+        addDialogListeners(alertDialogView);
+        talkDialog = createAlertDialog(alertDialogView);
 
     }
 
-    private void updateList(){
+    private void updateList() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -106,48 +115,49 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
         });
     }
 
-    private View createSpeakMethodDialog(){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DoctorsAvailableActivity.this);
 
+    private View createSpeakMethodDialog() {
         //bring external view into current activity
         LayoutInflater inflater = getLayoutInflater();
-        View dialoglayout = inflater.inflate(R.layout.doctors_available_contact_dialog, null);
-        alertDialogBuilder.setView(dialoglayout);
-
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // show it
-        alertDialog.show();
-
-        return dialoglayout;
-
+        return inflater.inflate(R.layout.doctors_available_contact_dialog, null);
     }
 
-    private void addDialogListeners(View parentView, final DoctorDTO doctorDTO){
-        Button phoneButton = (Button)parentView.findViewById(R.id.phone_button);
-        final Button videoButton = (Button)parentView.findViewById(R.id.video_button);
-        Button chatButton = (Button)parentView.findViewById(R.id.chat_button);
+    private AlertDialog createAlertDialog(View alertDialogView) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DoctorsAvailableActivity.this);
+        alertDialogBuilder.setView(alertDialogView);
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        return alertDialog;
+    }
+
+    private void addDialogListeners(View parentView) {
+
+
+        Button phoneButton = (Button) parentView.findViewById(R.id.phone_button);
+        final Button videoButton = (Button) parentView.findViewById(R.id.video_button);
+        Button chatButton = (Button) parentView.findViewById(R.id.chat_button);
 
 
         final Intent videoIntent = new Intent(this, VideoActivity.class);
         final Intent phoneIntent = new Intent(this, TeleMedicineActivity.class);
         final Intent chatIntent = new Intent(this, ChatActivity.class);
 
+        DoctorServiceImpl doctorService = new DoctorServiceImpl();
 
-        phoneButton.setOnClickListener(new View.OnClickListener() {
+
+                phoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 phoneIntent.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
                 phoneIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
-                doctorDTO.setVideoRequested(false);
-                doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
-                doctorDTO.setVisitWith(mPatientDTO.getEmail());
-                phoneIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-                mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
+                mDoctorDTO.setVideoRequested(false);
+                mDoctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+                mDoctorDTO.setVisitWith(mPatientDTO.getEmail());
+                phoneIntent.putExtra(CommonConstants.DOCTOR_DTO, mDoctorDTO);
+                mPaymentDTO.setDoctorId(mDoctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
                 mDoctorsTable.removeEventListener(mValueEventListener);
-                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
+                mDoctorService.updateDoctorToNotAvailable(mDoctorDTO);
                 startActivity(phoneIntent);
 
             }
@@ -158,14 +168,14 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
             public void onClick(View view) {
                 videoIntent.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
                 videoIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
-                doctorDTO.setVideoRequested(true);
-                doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
-                doctorDTO.setVisitWith(mPatientDTO.getEmail());
-                videoIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-                mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
+                mDoctorDTO.setVideoRequested(true);
+                mDoctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+                mDoctorDTO.setVisitWith(mPatientDTO.getEmail());
+                videoIntent.putExtra(CommonConstants.DOCTOR_DTO, mDoctorDTO);
+                mPaymentDTO.setDoctorId(mDoctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
                 mDoctorsTable.removeEventListener(mValueEventListener);
-                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
+                mDoctorService.updateDoctorToNotAvailable(mDoctorDTO);
                 startActivity(videoIntent);
             }
         });
@@ -175,19 +185,17 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
             public void onClick(View view) {
                 chatIntent.putExtra(CommonConstants.PAYMENT_DTO, mPaymentDTO);
                 chatIntent.putExtra(CommonConstants.PATIENT_DTO, mPatientDTO);
-                doctorDTO.setChatRequested(true);
-                doctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
-                doctorDTO.setVisitWith(mPatientDTO.getEmail());
-                chatIntent.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-                mPaymentDTO.setDoctorId(doctorDTO.getTableKey());
+                mDoctorDTO.setChatRequested(true);
+                mDoctorDTO.setRequesterPhoneNumber(mPatientDTO.getPhoneNumber());
+                mDoctorDTO.setVisitWith(mPatientDTO.getEmail());
+                chatIntent.putExtra(CommonConstants.DOCTOR_DTO, mDoctorDTO);
+                mPaymentDTO.setDoctorId(mDoctorDTO.getTableKey());
                 mPaymentService.updatePaymentWithDoctor(mPaymentDTO);
                 mDoctorsTable.removeEventListener(mValueEventListener);
-                mDoctorService.updateDoctorToNotAvailable(doctorDTO);
+                mDoctorService.updateDoctorToNotAvailable(mDoctorDTO);
                 startActivity(chatIntent);
             }
         });
-
-
 
 
     }
@@ -203,16 +211,19 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 Log.d(LOG_TAG, "Entering onDataChange...");
                 names.clear();
                 List<DoctorDTO> availableDoctors = mDoctorService.retrieveAvailableDoctors(dataSnapshot);
-
+                activeDoctorsList.clear();
+                int doctorCount = 0;
                 for (DoctorDTO doctor : availableDoctors) {
 
-                    double ratingAverage = (doctor.getRatingCount() == 0) ? 0 : doctor.getTotalRatingPoints() / (double)doctor.getRatingCount();
-
+                    double ratingAverage = (doctor.getRatingCount() == 0) ? 0 : doctor.getTotalRatingPoints() / (double) doctor.getRatingCount();
                     userKeys.put(names.size(), doctor.getTableKey());
+                    doctorKeys.put(doctorCount, doctor);
                     String name = doctor.getFirstName() + CommonConstants.SPACE + doctor.getLastName() + CommonConstants.SPACE
                             + df.format(ratingAverage);
                     Log.d(LOG_TAG, "Name: " + name);
+                    activeDoctorsList.add(doctor);
                     names.add(name);
+                    doctorCount++;
                 }
 
                 if (names.size() == 0) {
@@ -237,10 +248,10 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
                 int viewId = parent.getId();
                 switch (viewId) {
                     case R.id.lvDoctorsAvailableList:
-                        DoctorDTO doctorDTO = new DoctorDTO();
-                        doctorDTO.setTableKey(userKeys.get(position));
-                        View parentView = createSpeakMethodDialog();
-                        addDialogListeners(parentView, doctorDTO);
+//                        mDoctorDTO = new DoctorDTO();
+//                        mDoctorDTO.setTableKey(userKeys.get(position));
+                        mDoctorDTO = doctorKeys.get(position);
+                        talkDialog.show();
                         break;
                     default:
                         break;
@@ -258,19 +269,19 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
      */
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         System.out.println("onStart method for LoginActivity being called");
         super.onStart();
     }
 
     @Override
-    protected void onRestart(){
+    protected void onRestart() {
         System.out.println("onRestart method for LoginActivity being called");
         super.onRestart();
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         System.out.println("onPause method for LoginActivity being called");
         // Release db listener
         mDoctorsTable.removeEventListener(mValueEventListener);
@@ -278,7 +289,7 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         System.out.println("onResume method for LoginActivity being called");
         mDoctorsTable.addValueEventListener(mValueEventListener);
         updateList();
@@ -286,14 +297,13 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop()
-    {
+    protected void onStop() {
         System.out.println("onStop method for LoginActivity being called");
         super.onStop();
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         System.out.println("onDestroy method for LoginActivity being called");
         super.onDestroy();
     }

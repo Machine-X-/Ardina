@@ -421,4 +421,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         System.out.println("onDestroy method for LoginActivity being called");
         super.onDestroy();
     }
+
+    @Override
+    public void onBackPressed() {
+        
+    }
 }
