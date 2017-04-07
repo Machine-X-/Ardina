@@ -64,6 +64,8 @@ public class DoctorDAOImpl extends UserDAOImpl implements DoctorDAO {
         updateMap.put(CommonConstants.VIDEO_REQUESTED_COL, doctorDTO.getVideoRequested());
         updateMap.put(CommonConstants.CHAT_REQUESTED_COL, doctorDTO.getChatRequested());
         updateMap.put(CommonConstants.VISIT_WITH, doctorDTO.getVisitWith());
+        updateMap.put(CommonConstants.TOTAL_RATING_POINTS, doctorDTO.getTotalRatingPoints());
+        updateMap.put(CommonConstants.RATING_COUNT, doctorDTO.getRatingCount());
         update(updateMap, CommonConstants.DOCTORS_TABLE, doctorDTO.getTableKey());
         Log.d(LOG_TAG, "Exiting updateDoctorToNotAvailable...");
     }
@@ -78,6 +80,8 @@ public class DoctorDAOImpl extends UserDAOImpl implements DoctorDAO {
         updateMap.put(CommonConstants.VIDEO_REQUESTED_COL, doctorDTO.getVideoRequested());
         updateMap.put(CommonConstants.CHAT_REQUESTED_COL, doctorDTO.getChatRequested());
         updateMap.put(CommonConstants.VISIT_WITH, doctorDTO.getVisitWith());
+        updateMap.put(CommonConstants.TOTAL_RATING_POINTS, doctorDTO.getTotalRatingPoints());
+        updateMap.put(CommonConstants.RATING_COUNT, doctorDTO.getRatingCount());
         update(updateMap, CommonConstants.DOCTORS_TABLE, doctorDTO.getTableKey());
         Log.d(LOG_TAG, "Exiting updateDoctorToNotAvailable...");
     }
@@ -103,5 +107,15 @@ public class DoctorDAOImpl extends UserDAOImpl implements DoctorDAO {
         }
         Log.d(LOG_TAG, "Exiting retrieveAvailableDoctors...");
         return availableDoctors;
+    }
+
+    @Override
+    public void updateDoctorRating(DoctorDTO doctorDTO) {
+        Log.d(LOG_TAG, "Entering updateDoctorRating...");
+        Map<String, Object> updateMap = new HashMap<>();
+        updateMap.put(CommonConstants.TOTAL_RATING_POINTS, doctorDTO.getTotalRatingPoints());
+        updateMap.put(CommonConstants.RATING_COUNT, doctorDTO.getRatingCount());
+        update(updateMap, CommonConstants.DOCTORS_TABLE, doctorDTO.getTableKey());
+        Log.d(LOG_TAG, "Exiting updateDoctorRating...");
     }
 }

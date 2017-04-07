@@ -379,15 +379,14 @@ public class VideoActivity extends Activity implements
             final Intent i;
 
             if(isPatient){
-                i = new Intent(this, LoginActivity.class);
+                i = new Intent(this, RatingActivity.class);
             }
             else{
                 i = new Intent(this, ConfirmationActivity.class);
-
-                DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
-                i.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
-
             }
+
+            DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
+            i.putExtra(CommonConstants.DOCTOR_DTO, doctorDTO);
 
             mToolbarStatus.setText("Disconnecting...");
 

@@ -10,18 +10,44 @@
              layout="@layout/app_bar"/>
 
     <TextView
-        android:id="@+id/confirmation_text"
+        android:id="@+id/rating_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/app_bar"
         android:layout_marginTop="16dp"
         android:paddingBottom="20dp"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:text="@string/confirmation_text"
+        android:text="@string/rating_title"
+        android:textAlignment="center"
+        android:textColor="@color/blackPrimaryText"
+        android:textSize="30sp"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+    />
+
+    <TextView
+        android:id="@+id/rating_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="20dp"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:text="@string/rating_prompt"
         android:textAlignment="center"
         android:textColor="@color/blackPrimaryText"
         android:textSize="18sp"
-        />
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_below="@id/rating_header"
+    />
+
+    <Spinner
+        android:id="@+id/rating_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_below="@id/rating_prompt"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,12 +55,12 @@
         android:id="@+id/confirmation_buttons"
         android:orientation="horizontal"
         android:weightSum="2"
-        android:layout_below="@id/confirmation_text"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin">
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_below="@id/rating_spinner">
 
         <Button
-            android:id="@+id/confirm_button"
+            android:id="@+id/submit_button"
             style="actionButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +70,7 @@
             android:layout_weight="1"
             android:background="@drawable/login_auth_buttons"
             android:padding="5dp"
-            android:text="@string/confirm"
+            android:text="@string/rating_submit"
             android:textAlignment="center"
             android:textColor="@color/whitePrimaryText" />
 
@@ -63,52 +89,5 @@
             android:textAlignment="center"
             android:textColor="@color/whitePrimaryText" />
     </LinearLayout>
-
-    <!-- Form for entering patient notes -->
-    <TextView
-        android:id="@+id/patient_notes_instructions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/app_bar"
-        android:layout_marginTop="16dp"
-        android:paddingBottom="20dp"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:text="@string/patient_notes_prompt"
-        android:textAlignment="center"
-        android:textColor="@color/blackPrimaryText"
-        android:textSize="18sp"
-        android:visibility="gone"/>
-
-    <!-- notes from doctor -->
-    <EditText
-        android:id="@+id/patient_notes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/patient_notes_instructions"
-        android:hint="@string/patient_notes_hint"
-        android:inputType="textCapSentences|textMultiLine"
-        android:maxLength="2000"
-        android:maxLines="4"
-        android:scrollHorizontally="false"
-        android:visibility="gone"/>
-
-    <Button
-        android:id="@+id/send_button"
-        style="actionButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/patient_notes"
-        android:layout_marginLeft="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/login_auth_buttons"
-        android:padding="5dp"
-        android:text="@string/send"
-        android:textAlignment="center"
-        android:textColor="@color/whitePrimaryText"
-        android:visibility="gone"
-
-        />
-
 
 </RelativeLayout>
