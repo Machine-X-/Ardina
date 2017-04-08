@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.myardina.buckeyes.myardina.Common.CommonConstants;
+import com.myardina.buckeyes.myardina.CustomDoctorAdapter;
 import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
 import com.myardina.buckeyes.myardina.DTO.PatientDTO;
 import com.myardina.buckeyes.myardina.DTO.PaymentDTO;
@@ -54,7 +55,7 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
 
     private DatabaseReference mDoctorsTable;
 
-    private ArrayAdapter<String> mAdapter;
+    private CustomDoctorAdapter mAdapter;
     private List<String> names;
     private Map<Integer, String> userKeys;
     private Map<Integer, DoctorDTO> doctorKeys;
@@ -86,7 +87,7 @@ public class DoctorsAvailableActivity extends AppCompatActivity {
 
         final ListView lvDoctorListView = (ListView) findViewById(R.id.lvDoctorsAvailableList);
         lvDoctorListView.setOnItemClickListener(mOnItemClickListener);
-        mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, names);
+        mAdapter = new CustomDoctorAdapter(this, activeDoctorsList);
         lvDoctorListView.setAdapter(mAdapter);
 
         mPatientDTO = (PatientDTO) getIntent().getExtras().get(CommonConstants.PATIENT_DTO);
