@@ -218,12 +218,11 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         Button loginBtn = (Button) solo.getCurrentActivity().findViewById(R.id.email_sign_in_button);
         solo.clickOnView(loginBtn);
         //waiting for login in case there is a network delay
-        solo.waitForActivity(SymptomsActivity.class, 2000);
+        solo.waitForActivity(SymptomsActivity.class, 4000);
         // assert that the current activity is the SymptomsActivity.class
-        solo.assertCurrentActivity("Expected Symptoms activity", SymptomsActivity.class);
+        solo.assertCurrentActivity("Expected Symptoms Activity", SymptomsActivity.class);
         //click on continue button
         Button continueButton = (Button) solo.getCurrentActivity().findViewById(R.id.b_continue_to_payment);
-        //solo.waitForView(continueButton, 4000, false);
         solo.waitForView(continueButton);
         solo.clickOnView(continueButton);
         solo.waitForView(continueButton, 4000, false);
@@ -242,9 +241,9 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
 
         // Set rating count and total rating to 0
         //int ratingCount = 0;
-        doctorDTO.setTotalRatingPoints(0);
-        doctorDTO.setRatingCount(0);
-        mDoctorService.updateDoctorRating(doctorDTO);
+        //doctorDTO.setTotalRatingPoints(0);
+        //doctorDTO.setRatingCount(0);
+        //mDoctorService.updateDoctorRating(doctorDTO);
         //Sets Doctor availability to true in Firebase
 
         solo.clickOnView(bypassPayPal);
@@ -270,8 +269,8 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         solo.waitForView(rating, 4000, false);
         solo.clickOnView(rating);
         solo.clickInList(6);
-        score = Integer.parseInt((String)rating.getSelectedItem());
-        mDoctorService.updateDoctorRating(doctorDTO);
+        //score = Integer.parseInt((String)rating.getSelectedItem());
+        //mDoctorService.updateDoctorRating(doctorDTO);
 
         // Submit rating
         Button submitB = (Button) solo.getCurrentActivity().findViewById(R.id.submit_button);
@@ -279,10 +278,10 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
 
         // update ratings for doctor
         //score = Integer.parseInt((String)rating.getSelectedItem());
-        doctorDTO.setTotalRatingPoints(doctorDTO.getTotalRatingPoints() + score);
-        doctorDTO.setRatingCount(doctorDTO.getRatingCount() + 1);
+        //doctorDTO.setTotalRatingPoints(doctorDTO.getTotalRatingPoints() + score);
+        //doctorDTO.setRatingCount(doctorDTO.getRatingCount() + 1);
         //ratingCount=+ 1;
-        mDoctorService.updateDoctorRating(doctorDTO);
+        //mDoctorService.updateDoctorRating(doctorDTO);
         solo.waitForActivity(LoginActivity.class, 2000);
         solo.assertCurrentActivity("Expected LoginActivity", LoginActivity.class);
 
@@ -336,7 +335,7 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         // Choose an available doctor from the list
         //double average = doctorDTO.getTotalRatingPoints()/ratingCount;
         // Check the average doctor rating
-        //assertEquals(5.0, average, 0.4);
+        assertEquals(5.0, doctorDTO.getTotalRatingPoints(), 0.4);
 
 
         solo.clickInList(1);
@@ -359,15 +358,14 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         solo.waitForView(rating, 4000, false);
         solo.clickOnView(rating);
         solo.clickInList(0);
-        score = Integer.parseInt((String) rating.getSelectedItem());
 
         // Submit rating
         submitB = (Button) solo.getCurrentActivity().findViewById(R.id.submit_button);
         solo.clickOnView(submitB);
-        doctorDTO.setTotalRatingPoints(doctorDTO.getTotalRatingPoints() + score);
-        doctorDTO.setRatingCount(doctorDTO.getRatingCount() + 1);
+        //doctorDTO.setTotalRatingPoints(doctorDTO.getTotalRatingPoints() + score);
+        //doctorDTO.setRatingCount(doctorDTO.getRatingCount() + 1);
         //ratingCount =+ 1;
-        mDoctorService.updateDoctorRating(doctorDTO);
+       // mDoctorService.updateDoctorRating(doctorDTO);
 
         solo.waitForActivity(LoginActivity.class, 2000);
         solo.assertCurrentActivity("Expected LoginActivity", LoginActivity.class);
@@ -422,7 +420,7 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         // Verify that average rating is 2.5
         //assertEquals(true, solo.getCurrentActivity().findViewById(R.id.stars_2_half).isShown());
         //average = doctorDTO.getTotalRatingPoints()/ratingCount;
-        //assertEquals(2.5, average);
+        assertEquals(2.5, doctorDTO.getTotalRatingPoints(), 0.4);
         // Choose an available doctor from the list
         solo.clickInList(1);
         // Choose a communication method-video
@@ -447,10 +445,10 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         submitB = (Button) solo.getCurrentActivity().findViewById(R.id.submit_button);
         solo.clickOnView(submitB);
 
-        doctorDTO.setTotalRatingPoints(doctorDTO.getTotalRatingPoints() + score);
-        doctorDTO.setRatingCount(doctorDTO.getRatingCount() + 1);
+        //doctorDTO.setTotalRatingPoints(doctorDTO.getTotalRatingPoints() + score);
+        //doctorDTO.setRatingCount(doctorDTO.getRatingCount() + 1);
         //ratingCount += 1;
-        mDoctorService.updateDoctorRating(doctorDTO);
+        //mDoctorService.updateDoctorRating(doctorDTO);
 
         solo.waitForActivity(LoginActivity.class, 2000);
         solo.assertCurrentActivity("Expected LoginActivity", LoginActivity.class);
@@ -459,6 +457,11 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
         mDoctorService = new DoctorServiceImpl();
         mDoctorService.updateDoctorAvailability(doctorDTO);
+
+        // Clear ratings at end of test
+        doctorDTO.setTotalRatingPoints(0);
+        doctorDTO.setRatingCount(0);
+        mDoctorService.updateDoctorRating(doctorDTO);
 
     }
 
