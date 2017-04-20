@@ -202,6 +202,19 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
 
     public void testRatingActivityPatientVideoViewRatings() throws Exception {
 
+        int ratingCount = 0;
+        double docRating = 0;
+        int indRating = 0;
+        double average = 0;
+
+        DoctorDTO doctorDTO = new DoctorDTO();
+        doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
+
+        mDoctorService = new DoctorServiceImpl();
+        doctorDTO.setTotalRatingPoints(0);
+        doctorDTO.setRatingCount(0);
+        mDoctorService.updateDoctorRating(doctorDTO);
+
         solo.unlockScreen();
         //This code just logs in and gets to symptom activity,
         //repeat of code of testing successful login from login activity test
@@ -233,19 +246,12 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         Button bypassPayPal = (Button) solo.getCurrentActivity().findViewById(R.id.b_debug_to_doctors_available);
         solo.waitForView(bypassPayPal, 2000, false);
 
-        DoctorDTO doctorDTO = new DoctorDTO();
         doctorDTO.setAvailable(true);
         doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
         mDoctorService = new DoctorServiceImpl();
         mDoctorService.updateDoctorAvailability(doctorDTO);
 
         // Set rating count and total rating to 0
-        //int ratingCount = 0;
-        //doctorDTO.setTotalRatingPoints(0);
-        //doctorDTO.setRatingCount(0);
-        //mDoctorService.updateDoctorRating(doctorDTO);
-        //Sets Doctor availability to true in Firebase
-
         solo.clickOnView(bypassPayPal);
 
         // Choose an available doctor from the list
@@ -263,25 +269,20 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
        // solo.sleep(2000);
         solo.assertCurrentActivity("Expected Rating Activity", RatingActivity.class);
 
+
         // Rate doctor as a "5/5"
-        int score;
         Spinner rating = (Spinner) solo.getCurrentActivity().findViewById(R.id.rating_spinner);
         solo.waitForView(rating, 4000, false);
         solo.clickOnView(rating);
         solo.clickInList(6);
-        //score = Integer.parseInt((String)rating.getSelectedItem());
-        //mDoctorService.updateDoctorRating(doctorDTO);
+        docRating  += 5;
+        ratingCount++;
 
         // Submit rating
         Button submitB = (Button) solo.getCurrentActivity().findViewById(R.id.submit_button);
         solo.clickOnView(submitB);
 
         // update ratings for doctor
-        //score = Integer.parseInt((String)rating.getSelectedItem());
-        //doctorDTO.setTotalRatingPoints(doctorDTO.getTotalRatingPoints() + score);
-        //doctorDTO.setRatingCount(doctorDTO.getRatingCount() + 1);
-        //ratingCount=+ 1;
-        //mDoctorService.updateDoctorRating(doctorDTO);
         solo.waitForActivity(LoginActivity.class, 2000);
         solo.assertCurrentActivity("Expected LoginActivity", LoginActivity.class);
 
@@ -333,9 +334,9 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         solo.clickOnView(bypassPayPal);
 
         // Choose an available doctor from the list
-        //double average = doctorDTO.getTotalRatingPoints()/ratingCount;
+       average = docRating / ratingCount;
         // Check the average doctor rating
-        assertEquals(5.0, doctorDTO.getTotalRatingPoints(), 0.4);
+        assertEquals(5.0, average, 0.4);
 
 
         solo.clickInList(1);
@@ -350,7 +351,6 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
 
         // check that we have the Rating activity
         solo.waitForActivity("Rating Activity");
-       // solo.waitForActivity(RatingActivity.class, 6000);
         solo.assertCurrentActivity("Expected Rating Activity", RatingActivity.class);
 
         // Rate doctor as a "0/5"
@@ -358,14 +358,12 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         solo.waitForView(rating, 4000, false);
         solo.clickOnView(rating);
         solo.clickInList(0);
+        docRating += 0;
+        ratingCount++;
 
         // Submit rating
         submitB = (Button) solo.getCurrentActivity().findViewById(R.id.submit_button);
         solo.clickOnView(submitB);
-        //doctorDTO.setTotalRatingPoints(doctorDTO.getTotalRatingPoints() + score);
-        //doctorDTO.setRatingCount(doctorDTO.getRatingCount() + 1);
-        //ratingCount =+ 1;
-       // mDoctorService.updateDoctorRating(doctorDTO);
 
         solo.waitForActivity(LoginActivity.class, 2000);
         solo.assertCurrentActivity("Expected LoginActivity", LoginActivity.class);
@@ -417,10 +415,9 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
 
         solo.clickOnView(bypassPayPal);
         solo.waitForActivity(DoctorsAvailableActivity.class, 3000);
-        // Verify that average rating is 2.5
-        //assertEquals(true, solo.getCurrentActivity().findViewById(R.id.stars_2_half).isShown());
-        //average = doctorDTO.getTotalRatingPoints()/ratingCount;
-        assertEquals(2.5, doctorDTO.getTotalRatingPoints(), 0.4);
+        //(true, solo.getCurrentActivity().findViewById(R.id.stars_2_half).isShown());
+        average = docRating / ratingCount;
+        assertEquals(2.5, average, 0.4);
         // Choose an available doctor from the list
         solo.clickInList(1);
         // Choose a communication method-video
@@ -444,11 +441,6 @@ public class RatingActivityTest extends ActivityInstrumentationTestCase2<LoginAc
         // Submit rating
         submitB = (Button) solo.getCurrentActivity().findViewById(R.id.submit_button);
         solo.clickOnView(submitB);
-
-        //doctorDTO.setTotalRatingPoints(doctorDTO.getTotalRatingPoints() + score);
-        //doctorDTO.setRatingCount(doctorDTO.getRatingCount() + 1);
-        //ratingCount += 1;
-        //mDoctorService.updateDoctorRating(doctorDTO);
 
         solo.waitForActivity(LoginActivity.class, 2000);
         solo.assertCurrentActivity("Expected LoginActivity", LoginActivity.class);
