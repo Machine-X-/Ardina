@@ -28,8 +28,6 @@ import com.myardina.buckeyes.myardina.DAO.DoctorDAO;
 import com.myardina.buckeyes.myardina.DAO.Impl.DoctorDAOImpl;
 import com.myardina.buckeyes.myardina.DTO.DoctorDTO;
 import com.myardina.buckeyes.myardina.R;
-import com.myardina.buckeyes.myardina.Sevice.DoctorService;
-import com.myardina.buckeyes.myardina.Sevice.Impl.DoctorServiceImpl;
 
 public class DoctorActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnTouchListener, View.OnClickListener {
 
@@ -60,20 +58,23 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
 //        }
 
 
+        /** These are debug buttons that allow you to enter the doctor side of the application
+         *  without needed a notification from the user
+         */
         // TODO: DEBUG BUTTONS ! REMOVE BEFORE DEPLOYING
-        Button continueButton = (Button) findViewById(R.id.b_debug_to_doctors_chat);
-        continueButton.setOnClickListener(this);
+        Button mContinueButton = (Button) findViewById(R.id.b_debug_to_doctors_chat);
+        mContinueButton.setOnClickListener(this);
 
         // TODO: DEBUG BUTTON FOR VIDEO ! REMOVE BEFORE DEPLOYING
-        Button continueButtonV = (Button) findViewById(R.id.b_debug_to_doctor_video);
-        continueButtonV.setOnClickListener(this);
+        Button nContinueButtonV = (Button) findViewById(R.id.b_debug_to_doctor_video);
+        nContinueButtonV.setOnClickListener(this);
 
         /*** Testing without the debug button ***/
-        //continueButton.setVisibility(View.GONE);
+        //mContinueButton.setVisibility(View.GONE);
 
 
         /*** Testing without the debug button ***/
-        //continueButtonV.setVisibility(View.GONE);
+        //nContinueButton.setVisibility(View.GONE);
 
 
         FirebaseDatabase mRef = FirebaseDatabase.getInstance();
@@ -271,10 +272,6 @@ public class DoctorActivity extends AppCompatActivity implements AdapterView.OnI
     public void onClick(View view) {
 
         DoctorDTO doctorDTO = (DoctorDTO) getIntent().getExtras().get(CommonConstants.DOCTOR_DTO);
-        doctorDTO.setVisitWith("ceballos.2@osu.edu");
-        doctorDTO.setTableKey("-KdbonOqVaOpQmswnUSW");
-        DoctorService mDoctorService = new DoctorServiceImpl();
-        mDoctorService.updateDoctorAvailability(doctorDTO);
 
         // Continue to Doctor chat for testing purposes
         if(view == findViewById(R.id.b_debug_to_doctors_chat)) {

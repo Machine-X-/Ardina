@@ -60,8 +60,7 @@ public class RatingActivity extends AppCompatActivity {
                 doctorService.updateDoctorRating(mDoctorDTO);
                 mSubmitButton.setEnabled(false);
                 mCancelButton.setEnabled(false);
-                createDelay();
-                Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Successfully rated!", Toast.LENGTH_LONG).show();
                 redirectToLogin();
             }
         });
@@ -78,21 +77,6 @@ public class RatingActivity extends AppCompatActivity {
     private void redirectToLogin() {
         Intent login = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(login);
-    }
-
-    private void createDelay() {
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                try{
-                    Thread.sleep(3500);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-        };
-        thread.start();
     }
 
     @Override

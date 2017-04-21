@@ -151,7 +151,10 @@ public class ConfirmationActivityTest extends ActivityInstrumentationTestCase2<L
 
         solo.clickOnView(bypassPayPal);
 
+        //Choose doctor from list
         solo.clickInList(1);
+
+        //Choose Communication method
         solo.clickOnButton(2);
 
         solo.waitForView(5);
