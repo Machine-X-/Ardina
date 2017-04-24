@@ -558,11 +558,11 @@ public class Helper {
         }
 
         public interface UrlDownloadAsyncTaskHandler {
-            public void onPreExecute();
+            void onPreExecute();
 
-            public Object doInBackground(File file);
+            Object doInBackground(File file);
 
-            public void onPostExecute(Object object, UrlDownloadAsyncTask task);
+            void onPostExecute(Object object, UrlDownloadAsyncTask task);
         }
 
         @Override

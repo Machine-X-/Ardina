@@ -73,7 +73,7 @@ public class DoctorDTO extends UserDTO {
 
     public void setTotalRatingPoints(int totalRatingPoints){ this.totalRatingPoints = totalRatingPoints;}
 
-    public int getTotalRatingPoints(){ return totalRatingPoints; };
+    public int getTotalRatingPoints(){ return totalRatingPoints; }
 
     public void setRatingCount(int ratingCount) { this.ratingCount = ratingCount;}
 
